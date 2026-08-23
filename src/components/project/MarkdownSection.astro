@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  content?: string | null;
+}
+
+const { title, content } = Astro.props;
+---
+
+{content && (
+  <section class="project-section markdown-section">
+    <h2>{title}</h2>
+
+    <div
+      class="project-section__content"
+      set:html={content}
+    />
+  </section>
+)}

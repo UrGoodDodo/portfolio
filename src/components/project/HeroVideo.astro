@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+---
+
+{data.heroVideo && (
+  <section class="project-hero">
+    <video
+      class="project-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src={data.heroVideo} />
+    </video>
+  </section>
+)}

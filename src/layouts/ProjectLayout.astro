@@ -1,0 +1,26 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <article class="project-page">
+    <header class="project-page__header">
+      <a href="/projects">← Back to Projects</a>
+
+      <h1>{title}</h1>
+
+      {description && (
+        <p>{description}</p>
+      )}
+    </header>
+
+    <slot />
+  </article>
+</BaseLayout>

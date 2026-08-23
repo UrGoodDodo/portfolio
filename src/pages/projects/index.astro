@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<BaseLayout title="Projects">
+  <section>
+    <h1>Projects</h1>
+
+    <p>
+      A selection of my work in game development,
+      programming, technical art and level design.
+    </p>
+  </section>
+
+  <section class="projects-grid">
+    {projects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </section>
+</BaseLayout>

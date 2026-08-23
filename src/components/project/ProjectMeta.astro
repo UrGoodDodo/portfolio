@@ -1,0 +1,32 @@
+---
+interface Props {
+  year: number;
+  roles: string[];
+  technologies: string[];
+}
+
+const {
+  year,
+  roles,
+  technologies
+} = Astro.props;
+---
+
+<div class="project-meta">
+
+  <div class="project-meta__item">
+    <span class="project-meta__label">Role</span>
+    <span>{roles.join(' · ')}</span>
+  </div>
+
+  <div class="project-meta__item">
+    <span class="project-meta__label">Technologies</span>
+    <span>{technologies.join(' · ')}</span>
+  </div>
+
+  <div class="project-meta__item">
+    <span class="project-meta__label">Year</span>
+    <span>{year}</span>
+  </div>
+
+</div>

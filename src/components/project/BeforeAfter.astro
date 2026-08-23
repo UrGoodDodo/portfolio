@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+
+const comparison = data.beforeAfter;
+---
+
+{comparison && (
+  <section class="project-section">
+    <h2>Before / After</h2>
+
+    <div class="before-after">
+      <figure>
+        <img
+          src={comparison.before}
+          alt={`${data.title} before`}
+          loading="lazy"
+        />
+
+        <figcaption>Before</figcaption>
+      </figure>
+
+      <figure>
+        <img
+          src={comparison.after}
+          alt={`${data.title} after`}
+          loading="lazy"
+        />
+
+        <figcaption>After</figcaption>
+      </figure>
+    </div>
+  </section>
+)}

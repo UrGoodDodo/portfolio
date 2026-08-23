@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+---
+
+<section class="project-hero">
+  <img
+    src={data.cover}
+    alt={data.title}
+    class="project-hero__image"
+  />
+</section>

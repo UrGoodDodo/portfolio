@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+---
+
+{data.links && data.links.length > 0 && (
+  <section class="project-section project-links">
+    <h2>Links</h2>
+
+    <div class="project-links__list">
+      {data.links.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {link.label} ↗
+        </a>
+      ))}
+    </div>
+  </section>
+)}

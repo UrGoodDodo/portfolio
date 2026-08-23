@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const data = project.data;
+
+const slug = project.id.split('/')[0];
+---
+
+<article class="project-card">
+  <a href={`/projects/${slug}`}>
+    <div class="project-card__image">
+      <img
+        src={data.cover}
+        alt={data.title}
+      />
+    </div>
+
+    <div class="project-card__content">
+      <div class="project-card__roles">
+        {data.roles.map((role) => (
+          <span>{role}</span>
+        ))}
+      </div>
+
+      <h2>{data.title}</h2>
+
+      <p>{data.description}</p>
+
+      <div class="project-card__technologies">
+        {data.technologies.join(' · ')}
+      </div>
+    </div>
+  </a>
+</article>
