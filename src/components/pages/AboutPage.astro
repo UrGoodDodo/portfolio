@@ -1,16 +1,233 @@
 ---
+import '../../styles/about.css';
+
 import type { Language } from '../../i18n/config';
+
 import { getUi } from '../../i18n/utils';
+import { getPageContent } from '../../utils/pageContent';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+
 const t = getUi(lang);
+
+const page = await getPageContent(
+  lang,
+  'about'
+);
+
+if (!page) {
+  throw new Error(
+    `About page content not found for language: ${lang}`
+  );
+}
+
+const data = page.data;
 ---
 
-<section class="about-page">
-  <h1>{t.about.title}</h1>
-  <p>{t.about.intro}</p>
+<section class="about-hero">
+  <div class="about-hero__image">
+    <img
+      src="/images/about/about.jpg"
+      alt={t.site.name}
+    />
+  </div>
+
+  <div class="about-hero__content">
+    <p class="about-hero__label">
+      {data.title}
+    </p>
+
+    <h1>
+      {t.site.name}
+    </h1>
+
+    <p class="about-hero__intro">
+      {data.intro}
+    </p>
+  </div>
 </section>
+
+
+{data.background && (
+  <section class="about-section about-background">
+    <div class="about-section__label">
+      {data.background.title}
+    </div>
+
+    <div class="about-background__content">
+      <h2>
+        {data.background.title}
+      </h2>
+
+      <p>
+        {data.background.text}
+      </p>
+    </div>
+  </section>
+)}
+
+
+{data.areas && (
+  <section class="about-section">
+    <div class="about-section__header">
+      <h2>
+        {data.areas.title}
+      </h2>
+    </div>
+
+    <div class="about-areas">
+      {data.areas.items.map((area, index) => (
+        <article class="about-area">
+          <span>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <h3>
+            {area.title}
+          </h3>
+
+          <p>
+            {area.text}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+
+{data.education && (
+  <section class="about-section">
+    <div class="about-section__header">
+      <h2>
+        {data.education.title}
+      </h2>
+    </div>
+
+    <div class="about-education">
+      <article class="about-education__item">
+        <div class="about-education__index">
+          01
+        </div>
+
+        <div class="about-education__content">
+          <h3>
+            {data.education.master.title}
+          </h3>
+
+          <p class="about-education__degree">
+            {data.education.master.degree}
+          </p>
+
+          <p>
+            {data.education.master.description}
+          </p>
+        </div>
+      </article>
+
+      <article class="about-education__item">
+        <div class="about-education__index">
+          02
+        </div>
+
+        <div class="about-education__content">
+          <h3>
+            {data.education.bachelor.title}
+          </h3>
+
+          <p class="about-education__degree">
+            {data.education.bachelor.degree}
+          </p>
+
+          <p>
+            {data.education.bachelor.description}
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+)}
+
+
+{data.courses && (
+  <section class="about-section">
+    <div class="about-section__header">
+      <h2>
+        {data.courses.title}
+      </h2>
+    </div>
+
+    <div class="about-courses">
+      {data.courses.items.map((course) => (
+        <div class="about-course">
+          {course}
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+
+{data.technologies && (
+  <section class="about-section">
+    <div class="about-section__header">
+      <h2>
+        {data.technologies.title}
+      </h2>
+    </div>
+
+    <div class="about-technologies">
+      <article class="about-technology">
+        <h3>
+          {data.technologies.creative.title}
+        </h3>
+
+        <div class="about-technology__items">
+          {data.technologies.creative.items.map((tool) => (
+            <span>
+              {tool}
+            </span>
+          ))}
+        </div>
+      </article>
+
+      <article class="about-technology">
+        <h3>
+          {data.technologies.development.title}
+        </h3>
+
+        <div class="about-technology__items">
+          {data.technologies.development.items.map((tool) => (
+            <span>
+              {tool}
+            </span>
+          ))}
+        </div>
+      </article>
+    </div>
+  </section>
+)}
+
+
+{data.contact && (
+  <section class="about-section about-contact">
+    <h2>
+      {data.contact.title}
+    </h2>
+
+    <p>
+      {data.contact.text}
+    </p>
+
+    <a
+      class="about-contact__button"
+      href="mailto:YOUR_EMAIL"
+    >
+      {t.common.contactMe}
+    </a>
+  </section>
+)}

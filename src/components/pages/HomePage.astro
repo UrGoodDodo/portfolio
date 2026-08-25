@@ -1,24 +1,177 @@
 ---
+import '../../styles/home.css';
+import '../../styles/projects.css';
+
+import ProjectCard from '../ProjectCard.astro';
+
 import type { Language } from '../../i18n/config';
+
 import { getUi } from '../../i18n/utils';
+import { getPageContent } from '../../utils/pageContent';
+
+import {
+  getLatestProjectsByLanguage,
+} from '../../utils/projectContent';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+
 const t = getUi(lang);
+
+const page = await getPageContent(
+  lang,
+  'home'
+);
+
+if (!page) {
+  throw new Error(
+    `Home page content not found for language: ${lang}`
+  );
+}
+
+const data = page.data;
+
+const latestProjects =
+  await getLatestProjectsByLanguage(lang, 3);
 ---
 
 <section class="home-hero">
-  <h1>{t.home.title}</h1>
-  <p>{t.home.subtitle}</p>
+  <div class="home-hero__content">
+    <p class="home-hero__name">
+      {t.site.name}
+    </p>
+
+    <h1>
+      {data.title}
+    </h1>
+
+    {data.subtitle && (
+      <p class="home-hero__subtitle">
+        {data.subtitle}
+      </p>
+    )}
+
+    <div class="home-hero__actions">
+      <a
+        class="button button--primary"
+        href={`/${lang}/projects`}
+      >
+        {t.common.viewAllProjects}
+      </a>
+
+      <a
+        class="button button--secondary"
+        href={`/${lang}/about`}
+      >
+        {t.common.aboutMe}
+      </a>
+    </div>
+  </div>
+
+  <div class="home-hero__image">
+    <img
+      src="/images/home/hero.jpg"
+      alt={t.site.name}
+    />
+  </div>
 </section>
 
-<section class="home-projects">
-  <h2>{t.common.featuredProjects}</h2>
 
-  <a href={`/${lang}/projects`}>
-    {t.common.viewAllProjects}
-  </a>
+<section class="home-section home-latest">
+  <div class="home-section__header">
+    <h2>
+      {t.common.latestProjects}
+    </h2>
+
+    <a href={`/${lang}/projects`}>
+      {t.common.viewAllProjects} →
+    </a>
+  </div>
+
+  <div class="projects-grid">
+    {latestProjects.map((project) => (
+      <ProjectCard
+        project={project}
+        lang={lang}
+      />
+    ))}
+  </div>
 </section>
+
+
+{data.about && (
+  <section class="home-section home-about">
+    <div class="home-about__image">
+      <img
+        src="/images/home/about.jpg"
+        alt={t.site.name}
+      />
+    </div>
+
+    <div class="home-about__content">
+      <h2>
+        {data.about.title}
+      </h2>
+
+      <p>
+        {data.about.text}
+      </p>
+
+      <a href={`/${lang}/about`}>
+        {t.common.aboutMe} →
+      </a>
+    </div>
+  </section>
+)}
+
+
+{data.areas && (
+  <section class="home-section">
+    <div class="home-section__header">
+      <h2>
+        {data.areas.title}
+      </h2>
+    </div>
+
+    <div class="home-areas">
+      {data.areas.items.map((area, index) => (
+        <article class="home-area">
+          <span>
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <h3>
+            {area.title}
+          </h3>
+
+          <p>
+            {area.text}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+
+{data.contact && (
+  <section class="home-section home-contact">
+    <h2>
+      {data.contact.title}
+    </h2>
+
+    <p>
+      {data.contact.text}
+    </p>
+
+    <a
+      class="button button--primary"
+      href="mailto:mrgreenerror1990@gmail.com"
+    >
+      {t.common.contactMe}
+    </a>
+  </section>
+)}

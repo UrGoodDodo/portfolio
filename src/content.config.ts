@@ -53,7 +53,97 @@ const projectContent = defineCollection({
   }),
 });
 
+const pages = defineCollection({
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/pages',
+  }),
+
+  schema: z.object({
+    title: z.string(),
+
+    subtitle: z.string().optional(),
+    intro: z.string().optional(),
+
+    about: z
+      .object({
+        title: z.string(),
+        text: z.string(),
+      })
+      .optional(),
+
+    background: z
+      .object({
+        title: z.string(),
+        text: z.string(),
+      })
+      .optional(),
+
+    areas: z
+      .object({
+        title: z.string(),
+
+        items: z.array(
+          z.object({
+            title: z.string(),
+            text: z.string(),
+          })
+        ),
+      })
+      .optional(),
+
+    education: z
+      .object({
+        title: z.string(),
+
+        master: z.object({
+          title: z.string(),
+          degree: z.string(),
+          description: z.string(),
+        }),
+
+        bachelor: z.object({
+          title: z.string(),
+          degree: z.string(),
+          description: z.string(),
+        }),
+      })
+      .optional(),
+
+    courses: z
+      .object({
+        title: z.string(),
+        items: z.array(z.string()),
+      })
+      .optional(),
+
+    technologies: z
+      .object({
+        title: z.string(),
+
+        creative: z.object({
+          title: z.string(),
+          items: z.array(z.string()),
+        }),
+
+        development: z.object({
+          title: z.string(),
+          items: z.array(z.string()),
+        }),
+      })
+      .optional(),
+
+    contact: z
+      .object({
+        title: z.string(),
+        text: z.string(),
+      })
+      .optional(),
+  }),
+});
+
 export const collections = {
   projects,
   projectContent,
+  pages,
 };

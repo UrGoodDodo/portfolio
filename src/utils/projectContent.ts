@@ -37,6 +37,15 @@ export async function getProjectsByLanguage(
     });
 }
 
+export async function getLatestProjectsByLanguage(
+  lang: Language,
+  limit = 3
+) {
+  const projects = await getProjectsByLanguage(lang);
+
+  return projects.slice(0, limit);
+}
+
 export function getProjectSlug(
   projectId: string
 ): string {

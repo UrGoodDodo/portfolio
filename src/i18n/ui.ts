@@ -12,16 +12,6 @@ type UiDictionary = {
     about: string;
   };
 
-  home: {
-    title: string;
-    subtitle: string;
-  };
-
-  about: {
-    title: string;
-    intro: string;
-  };
-
   projectsPage: {
     title: string;
     description: string;
@@ -48,8 +38,10 @@ type UiDictionary = {
 
   common: {
     viewProject: string;
-    featuredProjects: string;
+    latestProjects: string;
     viewAllProjects: string;
+    aboutMe: string;
+    contactMe: string;
   };
 };
 
@@ -66,18 +58,6 @@ export const ui: Record<Language, UiDictionary> = {
       about: 'About',
     },
 
-    home: {
-      title: 'Game Developer',
-      subtitle:
-        'Game developer focused on programming, technical art and interactive systems.',
-    },
-
-    about: {
-      title: 'About Me',
-      intro:
-        'I am a game developer with a background in programming and game development.',
-    },
-
     projectsPage: {
       title: 'Projects',
       description:
@@ -85,12 +65,12 @@ export const ui: Record<Language, UiDictionary> = {
     },
 
     sectionTitles: {
-        overview: 'Overview',
-        'technical-breakdown': 'Technical Breakdown',
-        'level-design': 'Level Design',
-        challenges: 'Challenges',
-        results: 'Results',
-        'development-process': 'Development Process',
+      overview: 'Overview',
+      'technical-breakdown': 'Technical Breakdown',
+      'level-design': 'Level Design',
+      challenges: 'Challenges',
+      results: 'Results',
+      'development-process': 'Development Process',
     },
 
     project: {
@@ -112,8 +92,10 @@ export const ui: Record<Language, UiDictionary> = {
 
     common: {
       viewProject: 'View Project',
-      featuredProjects: 'Featured Projects',
+      latestProjects: 'Latest Projects',
       viewAllProjects: 'View All Projects',
+      aboutMe: 'More About Me',
+      contactMe: 'Get in Touch',
     },
   },
 
@@ -129,18 +111,6 @@ export const ui: Record<Language, UiDictionary> = {
       about: 'Обо мне',
     },
 
-    home: {
-      title: 'Разработчик игр',
-      subtitle:
-        'Разработчик игр, специализирующийся на программировании, техническом арте и интерактивных системах.',
-    },
-
-    about: {
-      title: 'Обо мне',
-      intro:
-        'Я разработчик игр с образованием в области программирования и разработки игр.',
-    },
-
     projectsPage: {
       title: 'Проекты',
       description:
@@ -148,12 +118,12 @@ export const ui: Record<Language, UiDictionary> = {
     },
 
     sectionTitles: {
-        overview: 'Обзор',
-        'technical-breakdown': 'Техническая часть',
-        'level-design': 'Левел-дизайн',
-        challenges: 'Сложности',
-        results: 'Результаты',
-        'development-process': 'Процесс разработки',
+      overview: 'Обзор',
+      'technical-breakdown': 'Техническая часть',
+      'level-design': 'Левел-дизайн',
+      challenges: 'Сложности',
+      results: 'Результаты',
+      'development-process': 'Процесс разработки',
     },
 
     project: {
@@ -175,8 +145,10 @@ export const ui: Record<Language, UiDictionary> = {
 
     common: {
       viewProject: 'Открыть проект',
-      featuredProjects: 'Избранные проекты',
+      latestProjects: 'Последние проекты',
       viewAllProjects: 'Все проекты',
+      aboutMe: 'Подробнее обо мне',
+      contactMe: 'Связаться со мной',
     },
   },
 };
