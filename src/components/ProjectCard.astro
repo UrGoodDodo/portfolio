@@ -1,18 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../i18n/config';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  lang: Language;
 }
 
-const { project } = Astro.props;
+const { project, lang } = Astro.props;
 const data = project.data;
 
-const slug = project.id.split('/')[0];
+const [, slug] = project.id.split('/');
 ---
 
 <article class="project-card">
-  <a href={`/projects/${slug}`}>
+  <a href={`/${lang}/projects/${slug}`}>
     <div class="project-card__image">
       <img
         src={data.cover}
@@ -31,8 +33,14 @@ const slug = project.id.split('/')[0];
 
       <p>{data.description}</p>
 
-      <div class="project-card__technologies">
-        {data.technologies.join(' · ')}
+      <div class="project-card__meta">
+        <div class="project-card__technologies">
+          {data.technologies.join(' · ')}
+        </div>
+
+        <span class="project-card__year">
+          {data.year}
+        </span>
       </div>
     </div>
   </a>

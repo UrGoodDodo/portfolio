@@ -1,0 +1,24 @@
+---
+import type { Language } from '../../i18n/config';
+import { getUi } from '../../i18n/utils';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
+<section class="home-hero">
+  <h1>{t.home.title}</h1>
+  <p>{t.home.subtitle}</p>
+</section>
+
+<section class="home-projects">
+  <h2>{t.common.featuredProjects}</h2>
+
+  <a href={`/${lang}/projects`}>
+    {t.common.viewAllProjects}
+  </a>
+</section>

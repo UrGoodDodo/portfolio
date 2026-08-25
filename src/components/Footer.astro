@@ -1,3 +1,21 @@
+---
+import type { Language } from '../i18n/config';
+import { getUi } from '../i18n/utils';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
 <footer>
-  <p>© 2026 Your Name</p>
+  <p>
+    © 2026 {t.site.copyrightName}
+  </p>
+
+  <p>
+    {t.footer.rights}
+  </p>
 </footer>

@@ -1,0 +1,16 @@
+---
+import type { Language } from '../../i18n/config';
+import { getUi } from '../../i18n/utils';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
+<section class="about-page">
+  <h1>{t.about.title}</h1>
+  <p>{t.about.intro}</p>
+</section>

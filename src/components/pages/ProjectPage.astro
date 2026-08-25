@@ -1,0 +1,134 @@
+---
+import '../../styles/projects.css';
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import ProjectMeta from '../project/ProjectMeta.astro';
+import HeroImage from '../project/HeroImage.astro';
+import HeroVideo from '../project/HeroVideo.astro';
+import Gallery from '../project/Gallery.astro';
+import BeforeAfter from '../project/BeforeAfter.astro';
+import GameplayVideo from '../project/GameplayVideo.astro';
+import ProjectLinks from '../project/ProjectLinks.astro';
+import MarkdownSection from '../project/MarkdownSection.astro';
+
+import {
+  getUi,
+  getSectionTitle,
+} from '../../i18n/utils';
+
+import {
+  getProjectContent,
+  renderMarkdownSection,
+  getProjectSlug,
+} from '../../utils/projectContent';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Language;
+}
+
+const {
+  project,
+  lang,
+} = Astro.props;
+
+const data = project.data;
+
+const t = getUi(lang);
+
+const projectId = getProjectSlug(project.id);
+
+const contentEntry = await getProjectContent(
+  lang,
+  projectId
+);
+
+const contentBody = contentEntry?.body ?? '';
+---
+
+<article class="project-page">
+
+  <header class="project-page__header">
+    <a href={`/${lang}/projects`}>
+      ← {t.project.backToProjects}
+    </a>
+
+    <h1>{data.title}</h1>
+
+    <p>{data.description}</p>
+
+    <ProjectMeta
+      lang={lang}
+      year={data.year}
+      roles={data.roles}
+      technologies={data.technologies}
+    />
+  </header>
+
+  {
+    await Promise.all(
+      data.sections.map(async (section) => {
+        switch (section) {
+          case 'hero-image':
+            return (
+              <HeroImage project={project} />
+            );
+
+          case 'hero-video':
+            return (
+              <HeroVideo project={project} />
+            );
+
+          case 'before-after':
+            return (
+              <BeforeAfter
+                project={project}
+                lang={lang}
+              />
+            );
+
+          case 'gameplay-video':
+            return (
+              <GameplayVideo
+                project={project}
+                lang={lang}
+              />
+            );
+
+          case 'gallery':
+            return (
+              <Gallery
+                project={project}
+                lang={lang}
+              />
+            );
+
+          case 'project-links':
+            return (
+              <ProjectLinks
+                project={project}
+                lang={lang}
+              />
+            );
+
+          default: {
+            const content =
+              await renderMarkdownSection(
+                contentBody,
+                section
+              );
+
+            return (
+              <MarkdownSection
+                title={getSectionTitle(lang, section)}
+                content={content}
+                />
+            );
+          }
+        }
+      })
+    )
+  }
+
+</article>

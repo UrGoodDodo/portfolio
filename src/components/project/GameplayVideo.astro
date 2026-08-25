@@ -1,17 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import { getUi } from '../../i18n/utils';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  lang: Language;
 }
 
-const { project } = Astro.props;
+const {
+  project,
+  lang,
+} = Astro.props;
+
 const data = project.data;
+const t = getUi(lang);
 ---
 
 {data.gameplayVideo && (
   <section class="project-section">
-    <h2>Gameplay</h2>
+    <h2>{t.project.gameplay}</h2>
 
     <video
       class="project-video"

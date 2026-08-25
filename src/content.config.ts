@@ -20,19 +20,7 @@ const projects = defineCollection({
     cover: z.string(),
     featured: z.boolean().default(false),
 
-    sections: z.array(
-      z.enum([
-        'hero-image',
-        'hero-video',
-        'overview',
-        'technical-breakdown',
-        'level-design',
-        'before-after',
-        'gameplay-video',
-        'gallery',
-        'project-links',
-      ])
-    ),
+    sections: z.array(z.string()),
 
     heroVideo: z.string().optional(),
 

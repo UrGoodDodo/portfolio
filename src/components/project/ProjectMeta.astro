@@ -1,31 +1,47 @@
 ---
+import type { Language } from '../../i18n/config';
+import { getUi } from '../../i18n/utils';
+
 interface Props {
+  lang: Language;
   year: number;
   roles: string[];
   technologies: string[];
 }
 
 const {
+  lang,
   year,
   roles,
-  technologies
+  technologies,
 } = Astro.props;
+
+const t = getUi(lang);
 ---
 
 <div class="project-meta">
 
   <div class="project-meta__item">
-    <span class="project-meta__label">Role</span>
+    <span class="project-meta__label">
+      {t.project.role}
+    </span>
+
     <span>{roles.join(' · ')}</span>
   </div>
 
   <div class="project-meta__item">
-    <span class="project-meta__label">Technologies</span>
+    <span class="project-meta__label">
+      {t.project.technologies}
+    </span>
+
     <span>{technologies.join(' · ')}</span>
   </div>
 
   <div class="project-meta__item">
-    <span class="project-meta__label">Year</span>
+    <span class="project-meta__label">
+      {t.project.year}
+    </span>
+
     <span>{year}</span>
   </div>
 

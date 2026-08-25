@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AboutPage from '../../components/pages/AboutPage.astro';
+
+const lang = 'ru';
+---
+
+<BaseLayout
+  title="Обо мне"
+  lang={lang}
+>
+  <AboutPage lang={lang} />
+</BaseLayout>

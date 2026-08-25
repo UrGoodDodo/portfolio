@@ -1,17 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import { getUi } from '../../i18n/utils';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  lang: Language;
 }
 
-const { project } = Astro.props;
+const {
+  project,
+  lang,
+} = Astro.props;
+
 const data = project.data;
+const t = getUi(lang);
 ---
 
 {data.links && data.links.length > 0 && (
   <section class="project-section project-links">
-    <h2>Links</h2>
+    <h2>{t.project.links}</h2>
 
     <div class="project-links__list">
       {data.links.map((link) => (

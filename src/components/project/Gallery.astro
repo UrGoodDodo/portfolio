@@ -1,17 +1,26 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import { getUi } from '../../i18n/utils';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  lang: Language;
 }
 
-const { project } = Astro.props;
+const {
+  project,
+  lang,
+} = Astro.props;
+
 const data = project.data;
+const t = getUi(lang);
 ---
 
 {data.gallery && data.gallery.length > 0 && (
   <section class="project-section">
-    <h2>Gallery</h2>
+    <h2>{t.project.gallery}</h2>
 
     <div class="project-gallery">
       {data.gallery.map((image) => (

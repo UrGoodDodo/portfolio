@@ -1,39 +1,52 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import { getUi } from '../../i18n/utils';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  lang: Language;
 }
 
-const { project } = Astro.props;
-const data = project.data;
+const {
+  project,
+  lang,
+} = Astro.props;
 
+const data = project.data;
 const comparison = data.beforeAfter;
+
+const t = getUi(lang);
 ---
 
 {comparison && (
   <section class="project-section">
-    <h2>Before / After</h2>
+    <h2>{t.project.beforeAfter}</h2>
 
     <div class="before-after">
       <figure>
         <img
           src={comparison.before}
-          alt={`${data.title} before`}
+          alt={`${data.title} ${t.project.before}`}
           loading="lazy"
         />
 
-        <figcaption>Before</figcaption>
+        <figcaption>
+          {t.project.before}
+        </figcaption>
       </figure>
 
       <figure>
         <img
           src={comparison.after}
-          alt={`${data.title} after`}
+          alt={`${data.title} ${t.project.after}`}
           loading="lazy"
         />
 
-        <figcaption>After</figcaption>
+        <figcaption>
+          {t.project.after}
+        </figcaption>
       </figure>
     </div>
   </section>

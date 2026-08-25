@@ -1,0 +1,34 @@
+---
+import '../../styles/projects.css';
+import ProjectCard from '../ProjectCard.astro';
+
+import type { Language } from '../../i18n/config';
+import { getUi } from '../../i18n/utils';
+
+import {
+  getProjectsByLanguage,
+} from '../../utils/projectContent';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const t = getUi(lang);
+const projects = await getProjectsByLanguage(lang);
+---
+
+<section class="projects-page__header">
+  <h1>{t.projectsPage.title}</h1>
+  <p>{t.projectsPage.description}</p>
+</section>
+
+<section class="projects-grid">
+  {projects.map((project) => (
+    <ProjectCard
+      project={project}
+      lang={lang}
+    />
+  ))}
+</section>

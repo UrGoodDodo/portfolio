@@ -1,20 +1,48 @@
 import { getCollection } from 'astro:content';
 import { marked } from 'marked';
 
-export async function getProjectContent(projectId: string) {
+import type { Language } from '../i18n/config';
+
+export async function getProjectContent(
+  lang: Language,
+  projectId: string
+) {
   const contents = await getCollection('projectContent');
 
   const content = contents.find((entry) => {
-    const folder = entry.id.split('/')[0];
+    const [entryLang, entryProjectId] = entry.id.split('/');
 
-    return folder === projectId;
+    return (
+      entryLang === lang &&
+      entryProjectId === projectId
+    );
   });
 
-  if (!content) {
-    return null;
-  }
+  return content ?? null;
+}
 
-  return content;
+export async function getProjectsByLanguage(
+  lang: Language
+) {
+  const projects = await getCollection('projects');
+
+  return projects
+    .filter((project) => {
+      const [entryLang] = project.id.split('/');
+
+      return entryLang === lang;
+    })
+    .sort((a, b) => {
+      return b.data.year - a.data.year;
+    });
+}
+
+export function getProjectSlug(
+  projectId: string
+): string {
+  const [, slug] = projectId.split('/');
+
+  return slug;
 }
 
 export function getMarkdownSection(
@@ -28,7 +56,9 @@ export function getMarkdownSection(
   const heading = `## ${sectionName}`;
 
   const startIndex = lines.findIndex(
-    (line) => line.trim().toLowerCase() === heading.toLowerCase()
+    (line) =>
+      line.trim().toLowerCase() ===
+      heading.toLowerCase()
   );
 
   if (startIndex === -1) {
@@ -37,36 +67,38 @@ export function getMarkdownSection(
 
   const sectionLines: string[] = [];
 
-  for (let i = startIndex + 1; i < lines.length; i++) {
+  for (
+    let i = startIndex + 1;
+    i < lines.length;
+    i++
+  ) {
     const line = lines[i];
 
     // Следующая секция второго уровня завершает текущую.
-    if (/^##\s+/.test(line)) {
+    if (/^\s*##\s+/.test(line)) {
       break;
     }
 
     sectionLines.push(line);
   }
 
-  return sectionLines.join('\n').trim();
-}
+  const content = sectionLines
+    .join('\n')
+    .trim();
 
-export function formatSectionTitle(sectionName: string): string {
-  return sectionName
-    .split('-')
-    .map(
-      (word) =>
-        word.charAt(0).toUpperCase() +
-        word.slice(1)
-    )
-    .join(' ');
+  return content.length > 0
+    ? content
+    : null;
 }
 
 export async function renderMarkdownSection(
   markdown: string,
   sectionName: string
 ): Promise<string | null> {
-  const section = getMarkdownSection(markdown, sectionName);
+  const section = getMarkdownSection(
+    markdown,
+    sectionName
+  );
 
   if (!section) {
     return null;
