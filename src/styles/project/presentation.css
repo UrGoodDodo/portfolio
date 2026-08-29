@@ -1,0 +1,623 @@
+/* ---------------- PROJECT PRESENTATION ---------------- */
+
+.project-presentation__header {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom:
+    clamp(
+      1.5rem,
+      3vw,
+      2.5rem
+    );
+}
+
+.project-presentation__header h2 {
+  margin: 0;
+
+  text-align: center;
+}
+
+.project-presentation__counter {
+  margin-top: 0.75rem;
+
+  padding-right:
+    clamp(
+      3.5rem,
+      5vw,
+      5rem
+    );
+
+  color:
+    var(--color-text-muted);
+
+  font-size: 0.875rem;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  text-align: right;
+}
+
+
+/* ---------------- PRESENTATION VIEWER ---------------- */
+
+.project-presentation__viewer {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap:
+    clamp(
+      0.75rem,
+      1.5vw,
+      1.5rem
+    );
+}
+
+
+/* ---------------- VIEWPORT ---------------- */
+
+.project-presentation__viewport {
+  min-width: 0;
+
+  overflow: hidden;
+
+  scroll-behavior: smooth;
+}
+
+
+/* ---------------- TRACK ---------------- */
+
+.project-presentation__track {
+  display: flex;
+
+  gap:
+    clamp(
+      1rem,
+      1.5vw,
+      1.5rem
+    );
+}
+
+
+/* ---------------- SLIDES ---------------- */
+
+.project-presentation__slide {
+  flex:
+    0 0
+    42%;
+
+  min-width: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 0;
+
+  border-radius: 0.35rem;
+
+  background: transparent;
+
+  color: inherit;
+
+  cursor: zoom-in;
+
+  appearance: none;
+}
+
+.project-presentation__slide img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: contain;
+
+  border-radius: 0.35rem;
+
+  background:
+    #101216;
+
+  box-shadow:
+    0 1rem 3rem
+    rgba(
+      0,
+      0,
+      0,
+      0.2
+    );
+
+  transition:
+    transform 250ms ease,
+    opacity var(--transition-fast);
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+  .project-presentation__slide:hover img {
+    transform:
+      scale(1.01);
+
+    opacity: 0.92;
+  }
+}
+
+
+/* ---------------- PRESENTATION NAVIGATION ---------------- */
+
+.project-presentation__nav {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width:
+    clamp(
+      2.75rem,
+      3vw,
+      3.5rem
+    );
+
+  height:
+    clamp(
+      2.75rem,
+      3vw,
+      3.5rem
+    );
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius:
+    999rem;
+
+  background:
+    var(--color-surface);
+
+  color:
+    var(--color-text);
+
+  font-size: 1.25rem;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.project-presentation__nav:hover:not(:disabled) {
+  background:
+    var(--color-surface-hover);
+
+  border-color:
+    var(--color-border-hover);
+
+  color:
+    var(--color-accent);
+}
+
+.project-presentation__nav:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+
+/* ---------------- PRESENTATION MODAL ---------------- */
+
+.presentation-modal-open {
+  overflow: hidden;
+}
+
+.project-presentation__modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(
+      1rem,
+      3vw,
+      3rem
+    );
+
+  background:
+    rgba(
+      5,
+      6,
+      8,
+      0.96
+    );
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+}
+
+.project-presentation__modal[hidden] {
+  display: none;
+}
+
+
+/* ---------------- MODAL VIEWER ---------------- */
+
+.project-presentation__modal-viewer {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ---------------- MODAL CONTENT ---------------- */
+
+.project-presentation__modal-content {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.project-presentation__modal-image {
+  display: block;
+
+  max-width: 100%;
+  max-height: 85vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  box-shadow:
+    0 1rem 4rem
+    rgba(
+      0,
+      0,
+      0,
+      0.4
+    );
+}
+
+
+/* ---------------- MODAL NAVIGATION ---------------- */
+
+.project-presentation__modal-nav {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width:
+    clamp(
+      3rem,
+      4vw,
+      4rem
+    );
+
+  height:
+    clamp(
+      3rem,
+      4vw,
+      4rem
+    );
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius:
+    999rem;
+
+  background:
+    rgba(
+      21,
+      24,
+      29,
+      0.9
+    );
+
+  color:
+    var(--color-text);
+
+  font-size:
+    clamp(
+      1.25rem,
+      2vw,
+      1.75rem
+    );
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.project-presentation__modal-nav:hover:not(:disabled) {
+  background:
+    var(--color-surface-hover);
+
+  border-color:
+    var(--color-border-hover);
+
+  color:
+    var(--color-accent);
+}
+
+.project-presentation__modal-nav:disabled {
+  opacity: 0.2;
+
+  cursor: default;
+}
+
+
+/* ---------------- MODAL CLOSE ---------------- */
+
+.project-presentation__modal-close {
+  position: absolute;
+
+  top:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  right:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 3rem;
+  height: 3rem;
+
+  padding: 0;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius:
+    999rem;
+
+  background:
+    rgba(
+      21,
+      24,
+      29,
+      0.9
+    );
+
+  color:
+    var(--color-text);
+
+  font-size: 1.5rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.project-presentation__modal-close:hover {
+  background:
+    var(--color-surface-hover);
+
+  border-color:
+    var(--color-border-hover);
+
+  color:
+    var(--color-accent);
+}
+
+
+/* ---------------- MODAL COUNTER ---------------- */
+
+.project-presentation__modal-counter {
+  position: absolute;
+
+  left: 50%;
+
+  bottom:
+    clamp(
+      1rem,
+      2vw,
+      2rem
+    );
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--color-text-secondary);
+
+  font-size: 0.9rem;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 64rem) {
+  .project-presentation__slide {
+    flex:
+      0 0
+      62%;
+  }
+}
+
+
+@media (max-width: 48rem) {
+  .project-presentation__header {
+    justify-content: center;
+
+    margin-bottom: 1.5rem;
+  }
+
+  .project-presentation__header h2 {
+    text-align: center;
+  }
+
+
+  /* Normal carousel */
+
+  .project-presentation__viewer {
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 1rem;
+  }
+
+  .project-presentation__viewport {
+    grid-column:
+      1 / -1;
+
+    grid-row: 1;
+  }
+
+  .project-presentation__slide {
+    flex:
+      0 0
+      88%;
+  }
+
+  .project-presentation__nav--prev {
+    grid-column: 1;
+
+    justify-self: start;
+  }
+
+  .project-presentation__nav--next {
+    grid-column: 2;
+
+    justify-self: end;
+  }
+
+  .project-presentation__counter {
+    margin-top: 0.75rem;
+
+    padding-right: 0;
+
+    text-align: right;
+  }
+
+
+  /* Fullscreen viewer */
+
+  .project-presentation__modal {
+    padding:
+      1rem;
+  }
+
+  .project-presentation__modal-viewer {
+    grid-template-columns:
+      1fr
+      1fr;
+
+    grid-template-rows:
+      minmax(
+        0,
+        1fr
+      )
+      auto;
+
+    gap: 1rem;
+  }
+
+  .project-presentation__modal-content {
+    grid-column:
+      1 / -1;
+
+    grid-row: 1;
+  }
+
+  .project-presentation__modal-nav--prev {
+    grid-column: 1;
+
+    grid-row: 2;
+
+    justify-self: start;
+  }
+
+  .project-presentation__modal-nav--next {
+    grid-column: 2;
+
+    grid-row: 2;
+
+    justify-self: end;
+  }
+
+  .project-presentation__modal-image {
+    max-height: 75vh;
+  }
+}

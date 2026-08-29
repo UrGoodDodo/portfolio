@@ -35,6 +35,16 @@ const projects = defineCollection({
 
     gameplayVideo: z.string().optional(),
 
+    presentation: z
+      .object({
+        folder: z.string(),
+        slides: z.number().int().positive(),
+        format: z
+          .enum(['webp', 'jpg', 'png'])
+          .default('webp'),
+      })
+      .optional(),
+
     links: z
       .array(
         z.object({

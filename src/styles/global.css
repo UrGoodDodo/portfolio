@@ -113,7 +113,7 @@ main {
 
 /* ---------------- HEADER ---------------- */
 
-header {
+.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -126,7 +126,7 @@ header {
   -webkit-backdrop-filter: blur(12px);
 }
 
-header nav {
+.site-header nav {
   width: min(
     calc(100% - (var(--page-padding) * 2)),
     var(--container-width)
@@ -151,7 +151,7 @@ header nav {
   );
 }
 
-header nav > a {
+.site-header nav > a {
   justify-self: start;
 
   font-size: clamp(
@@ -164,7 +164,7 @@ header nav > a {
   letter-spacing: -0.02em;
 }
 
-header nav > div:not(.language-switcher) {
+.site-header nav > div:not(.language-switcher) {
   display: flex;
   align-items: center;
 
@@ -175,7 +175,7 @@ header nav > div:not(.language-switcher) {
   );
 }
 
-header nav > div:not(.language-switcher) a {
+.site-header nav > div:not(.language-switcher) a {
   color: var(--color-text-secondary);
 
   font-size: clamp(
@@ -185,7 +185,7 @@ header nav > div:not(.language-switcher) a {
   );
 }
 
-header nav > div:not(.language-switcher) a:hover {
+.site-header nav > div:not(.language-switcher) a:hover {
   color: var(--color-text);
 }
 
@@ -306,13 +306,13 @@ p {
 /* ---------------- MOBILE ---------------- */
 
 @media (max-width: 48rem) {
-  header nav {
+  .site-header nav {
     grid-template-columns: 1fr auto;
 
     padding-block: 1rem;
   }
 
-  header nav > div:not(.language-switcher) {
+  .site-header nav > div:not(.language-switcher) {
     grid-column: 1 / -1;
 
     order: 3;
@@ -331,7 +331,7 @@ p {
     --page-padding: 0.75rem;
   }
 
-  header nav > div:not(.language-switcher) {
+  .site-header nav > div:not(.language-switcher) {
     gap: 1rem;
 
     font-size: 0.9rem;

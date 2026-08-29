@@ -2,6 +2,8 @@
 import type { Language } from '../../i18n/config';
 import { getUi } from '../../i18n/utils';
 
+import '../../styles/project/project-meta.css';
+
 interface Props {
   lang: Language;
   year: number;
@@ -26,7 +28,9 @@ const t = getUi(lang);
       {t.project.role}
     </span>
 
-    <span>{roles.join(' · ')}</span>
+    <span class="project-meta__value">
+      {roles.join(' · ')}
+    </span>
   </div>
 
   <div class="project-meta__item">
@@ -34,7 +38,9 @@ const t = getUi(lang);
       {t.project.technologies}
     </span>
 
-    <span>{technologies.join(' · ')}</span>
+    <span class="project-meta__value">
+      {technologies.join(' · ')}
+    </span>
   </div>
 
   <div class="project-meta__item">
@@ -42,7 +48,9 @@ const t = getUi(lang);
       {t.project.year}
     </span>
 
-    <span>{year}</span>
+    <span class="project-meta__value">
+      {year}
+    </span>
   </div>
 
 </div>

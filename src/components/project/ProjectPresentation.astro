@@ -1,0 +1,186 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../../i18n/config';
+
+import '../../styles/project/presentation.css';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Language;
+}
+
+const {
+  project,
+  lang,
+} = Astro.props;
+
+const data = project.data;
+const presentation = data.presentation;
+
+const slidePaths = presentation
+  ? Array.from(
+      { length: presentation.slides },
+      (_, index) => {
+        const number =
+          String(index + 1).padStart(2, '0');
+
+        return `${presentation.folder}/${number}.${presentation.format}`;
+      }
+    )
+  : [];
+
+const presentationId =
+  `presentation-${project.id.replaceAll('/', '-')}`;
+---
+
+{presentation && slidePaths.length > 0 && (
+  <section
+    class="project-section project-presentation"
+    data-presentation
+    data-presentation-id={presentationId}
+  >
+    <div class="project-presentation__header">
+      <h2>
+        {lang === 'ru'
+          ? 'Презентация проекта'
+          : 'Project Presentation'}
+      </h2>
+    </div>
+
+    <div class="project-presentation__viewer">
+      <button
+        class="project-presentation__nav project-presentation__nav--prev"
+        type="button"
+        aria-label={
+          lang === 'ru'
+            ? 'Предыдущие слайды'
+            : 'Previous slides'
+        }
+        data-presentation-prev
+        disabled
+      >
+        ←
+      </button>
+
+      <div
+        class="project-presentation__viewport"
+        data-presentation-viewport
+      >
+        <div
+          class="project-presentation__track"
+          data-presentation-track
+        >
+          {slidePaths.map((slide, index) => (
+            <button
+              class="project-presentation__slide"
+              type="button"
+              data-presentation-slide
+              data-slide-index={index}
+              aria-label={
+                lang === 'ru'
+                  ? `Открыть слайд ${index + 1}`
+                  : `Open slide ${index + 1}`
+              }
+            >
+              <img
+                src={slide}
+                alt={`${data.title} presentation slide ${index + 1}`}
+                loading={index < 5 ? 'eager' : 'lazy'}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        class="project-presentation__nav project-presentation__nav--next"
+        type="button"
+        aria-label={
+          lang === 'ru'
+            ? 'Следующие слайды'
+            : 'Next slides'
+        }
+        data-presentation-next
+      >
+        →
+      </button>
+    </div>
+
+    <div
+      class="project-presentation__counter"
+      data-presentation-counter
+    >
+      01 / {String(slidePaths.length).padStart(2, '0')}
+    </div>
+
+    <div
+      class="project-presentation__modal"
+      data-presentation-modal
+      role="dialog"
+      aria-modal="true"
+      aria-label={
+        lang === 'ru'
+          ? 'Просмотр презентации'
+          : 'Presentation viewer'
+      }
+      hidden
+    >
+      <button
+        class="project-presentation__modal-close"
+        type="button"
+        aria-label={
+          lang === 'ru'
+            ? 'Закрыть презентацию'
+            : 'Close presentation'
+        }
+        data-presentation-modal-close
+      >
+        ×
+      </button>
+
+      <div class="project-presentation__modal-viewer">
+        <button
+          class="project-presentation__modal-nav project-presentation__modal-nav--prev"
+          type="button"
+          aria-label={
+            lang === 'ru'
+              ? 'Предыдущий слайд'
+              : 'Previous slide'
+          }
+          data-presentation-modal-prev
+        >
+          ←
+        </button>
+
+        <div class="project-presentation__modal-content">
+          <img
+            class="project-presentation__modal-image"
+            src=""
+            alt=""
+            data-presentation-modal-image
+          />
+        </div>
+
+        <button
+          class="project-presentation__modal-nav project-presentation__modal-nav--next"
+          type="button"
+          aria-label={
+            lang === 'ru'
+              ? 'Следующий слайд'
+              : 'Next slide'
+          }
+          data-presentation-modal-next
+        >
+          →
+        </button>
+      </div>
+
+      <div
+        class="project-presentation__modal-counter"
+        data-presentation-modal-counter
+      ></div>
+    </div>
+  </section>
+)}
+
+<script src="../../scripts/projectPresentation.ts"></script>

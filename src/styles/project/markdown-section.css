@@ -1,0 +1,86 @@
+/* ---------------- MARKDOWN SECTION ---------------- */
+
+.markdown-section > h2 {
+  margin-bottom:
+    clamp(
+      1.75rem,
+      3vw,
+      2.75rem
+    );
+
+  text-align: center;
+
+  font-size:
+    clamp(
+      2rem,
+      3vw,
+      3rem
+    );
+}
+
+.project-section__content {
+  max-width:
+    60rem;
+
+  margin-inline: auto;
+}
+
+.project-section__content p,
+.project-section__content li {
+  color:
+    var(--color-text-secondary);
+
+  font-size:
+    clamp(
+      1.05rem,
+      1.15vw,
+      1.2rem
+    );
+
+  line-height: 1.75;
+}
+
+.project-section__content h3 {
+  margin-top:
+    clamp(
+      2.25rem,
+      4vw,
+      3rem
+    );
+
+  font-size:
+    clamp(
+      1.35rem,
+      1.8vw,
+      1.75rem
+    );
+}
+
+.project-section__content pre {
+  overflow-x: auto;
+
+  padding:
+    clamp(
+      1rem,
+      2vw,
+      1.5rem
+    );
+
+  background:
+    #101216;
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius:
+    var(--radius-sm);
+}
+
+.project-section__content code {
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}

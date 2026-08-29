@@ -1,5 +1,5 @@
 ---
-import '../../styles/projects.css';
+import '../../styles/project/project-page.css';
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
 
@@ -11,6 +11,7 @@ import BeforeAfter from '../project/BeforeAfter.astro';
 import GameplayVideo from '../project/GameplayVideo.astro';
 import ProjectLinks from '../project/ProjectLinks.astro';
 import MarkdownSection from '../project/MarkdownSection.astro';
+import ProjectPresentation from '../project/ProjectPresentation.astro';
 
 import {
   getUi,
@@ -50,13 +51,16 @@ const contentBody = contentEntry?.body ?? '';
 <article class="project-page">
 
   <header class="project-page__header">
-    <a href={`/${lang}/projects`}>
-      ← {t.project.backToProjects}
-    </a>
 
-    <h1>{data.title}</h1>
+    <div class="project-page__intro">
+      <a href={`/${lang}/projects`}>
+        ← {t.project.backToProjects}
+      </a>
 
-    <p>{data.description}</p>
+      <h1>{data.title}</h1>
+
+      <p>{data.description}</p>
+    </div>
 
     <ProjectMeta
       lang={lang}
@@ -64,6 +68,7 @@ const contentBody = contentEntry?.body ?? '';
       roles={data.roles}
       technologies={data.technologies}
     />
+
   </header>
 
   {
@@ -104,6 +109,14 @@ const contentBody = contentEntry?.body ?? '';
               />
             );
 
+          case 'presentation':
+            return (
+              <ProjectPresentation
+                project={project}
+                lang={lang}
+              />
+            );
+
           case 'project-links':
             return (
               <ProjectLinks
@@ -123,7 +136,7 @@ const contentBody = contentEntry?.body ?? '';
               <MarkdownSection
                 title={getSectionTitle(lang, section)}
                 content={content}
-                />
+              />
             );
           }
         }

@@ -17,8 +17,14 @@ cover: "/images/mesh-slicing.gif"
 
 featured: true
 
+presentation:
+  folder: "/presentations/mesh-slicing"
+  slides: 5
+  format: "webp"
+
 sections:
   - hero-image
   - overview
   - technical-breakdown
+  - presentation
 ---

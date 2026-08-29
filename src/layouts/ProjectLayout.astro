@@ -1,18 +1,29 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { Language } from '../i18n/config';
 
 interface Props {
   title: string;
   description?: string;
+  lang: Language;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+} = Astro.props;
 ---
 
-<BaseLayout title={title}>
+<BaseLayout
+  title={title}
+  lang={lang}
+>
   <article class="project-page">
     <header class="project-page__header">
-      <a href="/projects">← Back to Projects</a>
+      <a href={`/${lang}/projects`}>
+        ← Back to Projects
+      </a>
 
       <h1>{title}</h1>
 
