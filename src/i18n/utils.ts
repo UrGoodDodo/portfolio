@@ -30,15 +30,26 @@ function formatSectionTitleFallback(
     .join(' ');
 }
 
-export function getLanguageFromUrl(url: URL): Language {
-  const [, firstSegment] = url.pathname.split('/');
+export function getLanguageFromUrl(
+  url: URL
+): Language {
+  const segments =
+    url.pathname
+      .split('/')
+      .filter(Boolean);
 
-  if (firstSegment === 'ru') {
-    return 'ru';
-  }
+  const language =
+    segments.find(
+      (segment) =>
+        segment === 'en' ||
+        segment === 'ru'
+    );
 
-  if (firstSegment === 'en') {
-    return 'en';
+  if (
+    language === 'en' ||
+    language === 'ru'
+  ) {
+    return language;
   }
 
   return defaultLanguage;
@@ -46,22 +57,42 @@ export function getLanguageFromUrl(url: URL): Language {
 
 export function getLocalizedPath(
   pathname: string,
+  currentLang: Language,
   targetLang: Language
 ): string {
-  const segments = pathname
-    .split('/')
-    .filter(Boolean);
-
-  if (
-    segments[0] === 'en' ||
-    segments[0] === 'ru'
-  ) {
-    segments[0] = targetLang;
-  } else {
-    segments.unshift(targetLang);
+  if (currentLang === targetLang) {
+    return pathname;
   }
 
-  return `/${segments.join('/')}${
-    pathname.endsWith('/') ? '/' : ''
-  }`;
+  const currentSegment =
+    `/${currentLang}/`;
+
+  const targetSegment =
+    `/${targetLang}/`;
+
+  if (
+    pathname.includes(currentSegment)
+  ) {
+    return pathname.replace(
+      currentSegment,
+      targetSegment
+    );
+  }
+
+  const currentEnding =
+    `/${currentLang}`;
+
+  const targetEnding =
+    `/${targetLang}`;
+
+  if (
+    pathname.endsWith(currentEnding)
+  ) {
+    return pathname.slice(
+      0,
+      -currentEnding.length
+    ) + targetEnding;
+  }
+
+  return pathname;
 }

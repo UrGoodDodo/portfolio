@@ -1,47 +1,33 @@
-export function withBase(
-  path: string
-): string {
-  const base =
-    import.meta.env.BASE_URL;
+function getNormalizedBase(): string {
+  const base = import.meta.env.BASE_URL;
 
-  const normalizedBase =
-    base.endsWith('/')
-      ? base.slice(0, -1)
-      : base;
+  if (!base || base === '/') {
+    return '';
+  }
+
+  return base.endsWith('/')
+    ? base.slice(0, -1)
+    : base;
+}
+
+export function withBase(path: string): string {
+  const base = getNormalizedBase();
 
   const normalizedPath =
     path.startsWith('/')
       ? path
       : `/${path}`;
 
-  return `${normalizedBase}${normalizedPath}`;
-}
-
-
-export function withoutBase(
-  path: string
-): string {
-  const base =
-    import.meta.env.BASE_URL;
-
-  const normalizedBase =
-    base.endsWith('/')
-      ? base.slice(0, -1)
-      : base;
-
-  if (
-    normalizedBase &&
-    path.startsWith(normalizedBase)
-  ) {
-    const result =
-      path.slice(
-        normalizedBase.length
-      );
-
-    return result.startsWith('/')
-      ? result
-      : `/${result}`;
+  if (!base) {
+    return normalizedPath;
   }
 
-  return path;
+  if (
+    normalizedPath === base ||
+    normalizedPath.startsWith(`${base}/`)
+  ) {
+    return normalizedPath;
+  }
+
+  return `${base}${normalizedPath}`;
 }

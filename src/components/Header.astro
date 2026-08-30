@@ -3,7 +3,6 @@ import type { Language } from '../i18n/config';
 
 import {
   withBase,
-  withoutBase,
 } from '../utils/basePath';
 
 import {
@@ -19,6 +18,9 @@ const { lang } = Astro.props;
 
 const t = getUi(lang);
 
+
+/* ---------------- NAVIGATION ---------------- */
+
 const homeUrl =
   withBase(`/${lang}/`);
 
@@ -29,30 +31,20 @@ const aboutUrl =
   withBase(`/${lang}/about`);
 
 
-/* ---------------- CURRENT ROUTE ---------------- */
-
-const currentPath =
-  withoutBase(
-    Astro.url.pathname
-  );
-
-
 /* ---------------- LANGUAGE LINKS ---------------- */
 
 const englishUrl =
-  withBase(
-    getLocalizedPath(
-      currentPath,
-      'en'
-    )
+  getLocalizedPath(
+    Astro.url.pathname,
+    lang,
+    'en'
   );
 
 const russianUrl =
-  withBase(
-    getLocalizedPath(
-      currentPath,
-      'ru'
-    )
+  getLocalizedPath(
+    Astro.url.pathname,
+    lang,
+    'ru'
   );
 ---
 
