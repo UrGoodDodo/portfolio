@@ -28,6 +28,9 @@
 
 .project-gameplay-video__frame {
   width: 100%;
+  max-width: 70rem;
+
+  margin-inline: auto;
 
   aspect-ratio:
     16 / 9;
