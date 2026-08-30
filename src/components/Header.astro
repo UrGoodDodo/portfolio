@@ -1,6 +1,10 @@
 ---
 import type { Language } from '../i18n/config';
-import { withBase } from '../utils/basePath';
+
+import {
+  withBase,
+  withoutBase,
+} from '../utils/basePath';
 
 import {
   getUi,
@@ -15,23 +19,41 @@ const { lang } = Astro.props;
 
 const t = getUi(lang);
 
-const homeUrl = withBase(`/${lang}/`);
-const projectsUrl = withBase(`/${lang}/projects`);
-const aboutUrl = withBase(`/${lang}/about`);
+const homeUrl =
+  withBase(`/${lang}/`);
 
-const englishUrl = withBase(
-  getLocalizedPath(
-    Astro.url.pathname,
-    'en'
-  )
-);
+const projectsUrl =
+  withBase(`/${lang}/projects`);
 
-const russianUrl = withBase(
-  getLocalizedPath(
-    Astro.url.pathname,
-    'ru'
-  )
-);
+const aboutUrl =
+  withBase(`/${lang}/about`);
+
+
+/* ---------------- CURRENT ROUTE ---------------- */
+
+const currentPath =
+  withoutBase(
+    Astro.url.pathname
+  );
+
+
+/* ---------------- LANGUAGE LINKS ---------------- */
+
+const englishUrl =
+  withBase(
+    getLocalizedPath(
+      currentPath,
+      'en'
+    )
+  );
+
+const russianUrl =
+  withBase(
+    getLocalizedPath(
+      currentPath,
+      'ru'
+    )
+  );
 ---
 
 <header class="site-header">

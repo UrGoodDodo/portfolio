@@ -1,5 +1,6 @@
 ---
 import '../../styles/about.css';
+import { withBase } from '../../utils/basePath';
 
 import type { Language } from '../../i18n/config';
 
@@ -31,7 +32,7 @@ const data = page.data;
 <section class="about-hero">
   <div class="about-hero__image">
     <img
-      src="/images/about/about.jpg"
+      src={withBase('/images/about/about.jpg')}
       alt={t.site.name}
     />
   </div>

@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
+import { withBase } from '../../utils/basePath';
 
 import '../../styles/project/presentation.css';
 
@@ -24,7 +25,9 @@ const slidePaths = presentation
         const number =
           String(index + 1).padStart(2, '0');
 
-        return `${presentation.folder}/${number}.${presentation.format}`;
+        return withBase(
+          `${presentation.folder}/${number}.${presentation.format}`
+        );
       }
     )
   : [];

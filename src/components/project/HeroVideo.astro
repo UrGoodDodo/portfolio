@@ -1,32 +1,25 @@
 ---
-import '../../styles/project/gameplay-video.css';
-
 import type { CollectionEntry } from 'astro:content';
-import type { Language } from '../../i18n/config';
+import { withBase } from '../../utils/basePath';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  lang: Language;
 }
 
-const {
-  project,
-} = Astro.props;
-
+const { project } = Astro.props;
 const data = project.data;
 ---
 
-{data.gameplayVideo && (
-  <section class="project-section gameplay-video">
-    <div class="gameplay-video__container">
-      <video
-        class="gameplay-video__media"
-        controls
-        playsinline
-        preload="metadata"
-      >
-        <source src={data.gameplayVideo} />
-      </video>
-    </div>
+{data.heroVideo && (
+  <section class="project-hero">
+    <video
+      class="project-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src={withBase(data.heroVideo)} />
+    </video>
   </section>
 )}

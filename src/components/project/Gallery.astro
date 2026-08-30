@@ -1,5 +1,6 @@
 ---
 import '../../styles/project/gallery.css';
+import { withBase } from '../../utils/basePath';
 
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
@@ -104,11 +105,11 @@ const galleryPages = Array.from(
                                   type="button"
                                   data-gallery-image
                                   data-image-index={imageIndex}
-                                  data-image-src={image}
+                                  data-image-src={withBase(image)}
                                   aria-label={`Open image ${imageIndex + 1}`}
                                 >
                                   <img
-                                    src={image}
+                                    src={withBase(image)}
                                     alt={`${data.title} screenshot ${imageIndex + 1}`}
                                     loading="lazy"
                                   />

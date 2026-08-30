@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
+import { withBase } from '../../utils/basePath';
 
 import { getUi } from '../../i18n/utils';
 
@@ -27,7 +28,7 @@ const t = getUi(lang);
     <div class="before-after">
       <figure>
         <img
-          src={comparison.before}
+          src={withBase(comparison.before)}
           alt={`${data.title} ${t.project.before}`}
           loading="lazy"
         />
@@ -39,7 +40,7 @@ const t = getUi(lang);
 
       <figure>
         <img
-          src={comparison.after}
+          src={withBase(comparison.after)}
           alt={`${data.title} ${t.project.after}`}
           loading="lazy"
         />

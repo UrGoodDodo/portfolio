@@ -12,6 +12,7 @@ import GameplayVideo from '../project/GameplayVideo.astro';
 import ProjectLinks from '../project/ProjectLinks.astro';
 import MarkdownSection from '../project/MarkdownSection.astro';
 import ProjectPresentation from '../project/ProjectPresentation.astro';
+import { withBase } from '../../utils/basePath';
 
 import {
   getUi,
@@ -53,7 +54,7 @@ const contentBody = contentEntry?.body ?? '';
   <header class="project-page__header">
 
     <div class="project-page__intro">
-      <a href={`/${lang}/projects`}>
+      <a href={withBase(`/${lang}/projects`)}>
         ← {t.project.backToProjects}
       </a>
 

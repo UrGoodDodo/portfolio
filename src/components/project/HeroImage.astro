@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { withBase } from '../../utils/basePath';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -11,7 +12,7 @@ const data = project.data;
 
 <section class="project-hero">
   <img
-    src={data.cover}
+    src={withBase(data.cover)}
     alt={data.title}
     class="project-hero__image"
   />
