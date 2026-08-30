@@ -1,6 +1,6 @@
-/* ---------------- MARKDOWN SECTION ---------------- */
+/* ---------------- MARKDOWN SECTION BASE ---------------- */
 
-.markdown-section > h2 {
+.markdown-section__title {
   margin-bottom:
     clamp(
       1.75rem,
@@ -10,18 +10,11 @@
 
   text-align: center;
 
-  font-size:
-    clamp(
-      2rem,
-      3vw,
-      3rem
-    );
+  color:
+    var(--color-text);
 }
 
 .project-section__content {
-  max-width:
-    60rem;
-
   margin-inline: auto;
 }
 
@@ -29,31 +22,6 @@
 .project-section__content li {
   color:
     var(--color-text-secondary);
-
-  font-size:
-    clamp(
-      1.05rem,
-      1.15vw,
-      1.2rem
-    );
-
-  line-height: 1.75;
-}
-
-.project-section__content h3 {
-  margin-top:
-    clamp(
-      2.25rem,
-      4vw,
-      3rem
-    );
-
-  font-size:
-    clamp(
-      1.35rem,
-      1.8vw,
-      1.75rem
-    );
 }
 
 .project-section__content pre {
@@ -83,4 +51,183 @@
     Consolas,
     "Liberation Mono",
     monospace;
+}
+
+
+/* ---------------- OVERVIEW ---------------- */
+
+.markdown-section--overview
+.markdown-section__title {
+  font-size:
+    clamp(
+      2rem,
+      3vw,
+      3rem
+    );
+
+  color:
+    var(--color-text);
+}
+
+.markdown-section--overview
+.project-section__content {
+  max-width:
+    68rem;
+}
+
+.markdown-section--overview
+.project-section__content p {
+  color:
+    var(--color-text);
+
+  font-size:
+    clamp(
+      1.15rem,
+      1.4vw,
+      1.35rem
+    );
+
+  line-height: 1.75;
+}
+
+.markdown-section--overview
+.project-section__content ul,
+.markdown-section--overview
+.project-section__content ol {
+  margin-top: 1.25rem;
+}
+
+.markdown-section--overview
+.project-section__content li {
+  color:
+    var(--color-text);
+
+  font-size:
+    clamp(
+      1.1rem,
+      1.25vw,
+      1.25rem
+    );
+
+  line-height: 1.7;
+}
+
+
+/* ---------------- TECHNICAL BREAKDOWN ---------------- */
+
+.markdown-section--technical
+.markdown-section__title {
+  font-size:
+    clamp(
+      2rem,
+      2.7vw,
+      2.8rem
+    );
+
+  color:
+    var(--color-text);
+}
+
+.markdown-section--technical
+.project-section__content {
+  max-width:
+    72rem;
+}
+
+.markdown-section--technical
+.project-section__content p,
+.markdown-section--technical
+.project-section__content li {
+  color:
+    var(--color-text-secondary);
+
+  font-size:
+    clamp(
+      1rem,
+      1.05vw,
+      1.15rem
+    );
+
+  line-height: 1.75;
+}
+
+.markdown-section--technical
+.project-section__content h3 {
+  margin-top:
+    clamp(
+      2.75rem,
+      5vw,
+      4rem
+    );
+
+  margin-bottom:
+    1rem;
+
+  color:
+    var(--color-text);
+
+  font-size:
+    clamp(
+      1.4rem,
+      1.8vw,
+      1.9rem
+    );
+
+  line-height: 1.25;
+}
+
+
+/* ---------------- DEFAULT MARKDOWN ---------------- */
+
+.markdown-section--default
+.project-section__content {
+  max-width:
+    60rem;
+}
+
+.markdown-section--default
+.project-section__content p,
+.markdown-section--default
+.project-section__content li {
+  color:
+    var(--color-text-secondary);
+
+  font-size:
+    clamp(
+      1rem,
+      1vw,
+      1.1rem
+    );
+
+  line-height: 1.7;
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 48rem) {
+  .markdown-section__title {
+    margin-bottom:
+      1.5rem;
+  }
+
+  .markdown-section--overview
+  .project-section__content p {
+    font-size:
+      1.05rem;
+  }
+
+  .markdown-section--overview
+  .project-section__content li {
+    font-size:
+      1.05rem;
+  }
+
+  .markdown-section--technical
+  .project-section__content p,
+  .markdown-section--technical
+  .project-section__content li {
+    font-size:
+      1rem;
+  }
 }

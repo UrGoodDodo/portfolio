@@ -19,20 +19,23 @@ cover: "/images/unreal-cinematic/cover.jpg"
 featured: false
 
 sections:
-  - hero-video
   - overview
   - gameplay-video
   - gallery
   - project-links
 
-heroVideo: "/videos/unreal-cinematic/cinematic.webm"
-
-gameplayVideo: "/videos/unreal-cinematic/full-cinematic.mp4"
+gameplayVideo: "https://www.youtube.com/watch?v=Cj2LMSD4pnY"
 
 gallery:
-  - "/images/unreal-cinematic/shot-01.jpg"
-  - "/images/unreal-cinematic/shot-02.jpg"
-  - "/images/unreal-cinematic/shot-03.jpg"
+  - "/images/gallery/unreal-cinematic/01.webp"
+  - "/images/gallery/unreal-cinematic/02.webp"
+  - "/images/gallery/unreal-cinematic/03.webp"
+  - "/images/gallery/unreal-cinematic/01.webp"
+  - "/images/gallery/unreal-cinematic/02.webp"
+  - "/images/gallery/unreal-cinematic/03.webp"
+  - "/images/gallery/unreal-cinematic/01.webp"
+  - "/images/gallery/unreal-cinematic/02.webp"
+  - "/images/gallery/unreal-cinematic/03.webp"
 
 links:
   - label: "Video"

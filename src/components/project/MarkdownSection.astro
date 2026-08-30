@@ -1,18 +1,30 @@
 ---
-
 import '../../styles/project/markdown-section.css';
 
 interface Props {
   title: string;
   content?: string | null;
+  variant?: 'default' | 'overview' | 'technical';
 }
 
-const { title, content } = Astro.props;
+const {
+  title,
+  content,
+  variant = 'default',
+} = Astro.props;
 ---
 
 {content && (
-  <section class="project-section markdown-section">
-    <h2>{title}</h2>
+  <section
+    class:list={[
+      'project-section',
+      'markdown-section',
+      `markdown-section--${variant}`,
+    ]}
+  >
+    <h2 class="markdown-section__title">
+      {title}
+    </h2>
 
     <div
       class="project-section__content"

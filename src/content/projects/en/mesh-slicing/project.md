@@ -23,7 +23,6 @@ presentation:
   format: "webp"
 
 sections:
-  - hero-image
   - overview
   - technical-breakdown
   - presentation

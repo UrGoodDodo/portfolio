@@ -1,4 +1,6 @@
 ---
+import '../../styles/project/gallery.css';
+
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
 
@@ -16,20 +18,189 @@ const {
 
 const data = project.data;
 const t = getUi(lang);
+
+const GALLERY_PAGE_SIZE = 6;
+
+const galleryImages = data.gallery ?? [];
+
+const galleryPages = Array.from(
+  {
+    length:
+      Math.ceil(
+        galleryImages.length /
+        GALLERY_PAGE_SIZE
+      ),
+  },
+  (_, pageIndex) => {
+    const start =
+      pageIndex *
+      GALLERY_PAGE_SIZE;
+
+    return Array.from(
+      {
+        length:
+          GALLERY_PAGE_SIZE,
+      },
+      (_, slotIndex) =>
+        galleryImages[
+          start + slotIndex
+        ] ?? null
+    );
+  }
+);
 ---
 
-{data.gallery && data.gallery.length > 0 && (
-  <section class="project-section">
-    <h2>{t.project.gallery}</h2>
+{galleryPages.length > 0 && (
+  <section
+    class="project-section project-gallery"
+    data-gallery
+  >
 
-    <div class="project-gallery">
-      {data.gallery.map((image) => (
-        <img
-          src={image}
-          alt={`${data.title} screenshot`}
-          loading="lazy"
-        />
-      ))}
+    <div class="project-gallery__viewer">
+      <button
+        class="project-gallery__nav project-gallery__nav--prev"
+        type="button"
+        aria-label="Previous gallery page"
+        data-gallery-prev
+        disabled
+      >
+        ←
+      </button>
+
+      <div
+        class="project-gallery__viewport"
+        data-gallery-viewport
+      >
+        <div class="project-gallery__pages">
+          {
+            galleryPages.map(
+              (page, pageIndex) => (
+                <div
+                  class="project-gallery__page"
+                  data-gallery-page
+                  data-page-index={pageIndex}
+                >
+                  {
+                    page.map(
+                      (image, slotIndex) => {
+                        const imageIndex =
+                          pageIndex *
+                          GALLERY_PAGE_SIZE +
+                          slotIndex;
+
+                        return (
+                          <div
+                            class:list={[
+                              'project-gallery__slot',
+                              `project-gallery__slot--${slotIndex + 1}`,
+                              !image &&
+                                'project-gallery__slot--empty',
+                            ]}
+                          >
+                            {
+                              image && (
+                                <button
+                                  class="project-gallery__image-button"
+                                  type="button"
+                                  data-gallery-image
+                                  data-image-index={imageIndex}
+                                  data-image-src={image}
+                                  aria-label={`Open image ${imageIndex + 1}`}
+                                >
+                                  <img
+                                    src={image}
+                                    alt={`${data.title} screenshot ${imageIndex + 1}`}
+                                    loading="lazy"
+                                  />
+                                </button>
+                              )
+                            }
+                          </div>
+                        );
+                      }
+                    )
+                  }
+                </div>
+              )
+            )
+          }
+        </div>
+      </div>
+
+      <button
+        class="project-gallery__nav project-gallery__nav--next"
+        type="button"
+        aria-label="Next gallery page"
+        data-gallery-next
+        disabled={galleryPages.length <= 1}
+      >
+        →
+      </button>
+    </div>
+
+    {
+      galleryPages.length > 1 && (
+        <div
+          class="project-gallery__counter"
+          data-gallery-counter
+        >
+          01 / {String(galleryPages.length).padStart(2, '0')}
+        </div>
+      )
+    }
+
+    <div
+      class="project-gallery__modal"
+      data-gallery-modal
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${data.title} gallery viewer`}
+      hidden
+    >
+      <button
+        class="project-gallery__modal-close"
+        type="button"
+        aria-label="Close gallery"
+        data-gallery-modal-close
+      >
+        ×
+      </button>
+
+      <div class="project-gallery__modal-viewer">
+        <button
+          class="project-gallery__modal-nav project-gallery__modal-nav--prev"
+          type="button"
+          aria-label="Previous image"
+          data-gallery-modal-prev
+        >
+          ←
+        </button>
+
+        <div class="project-gallery__modal-content">
+          <img
+            class="project-gallery__modal-image"
+            src=""
+            alt=""
+            data-gallery-modal-image
+          />
+        </div>
+
+        <button
+          class="project-gallery__modal-nav project-gallery__modal-nav--next"
+          type="button"
+          aria-label="Next image"
+          data-gallery-modal-next
+        >
+          →
+        </button>
+      </div>
+
+      <div
+        class="project-gallery__modal-counter"
+        data-gallery-modal-counter
+      ></div>
     </div>
   </section>
 )}
+
+<script src="../../scripts/projectGallery.ts"></script>

@@ -1,7 +1,8 @@
 ---
+import '../../styles/project/gameplay-video.css';
+
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../../i18n/config';
-
 import { getUi } from '../../i18n/utils';
 
 interface Props {
@@ -9,25 +10,65 @@ interface Props {
   lang: Language;
 }
 
-const {
-  project,
-  lang,
-} = Astro.props;
+const { project, lang } = Astro.props;
 
 const data = project.data;
 const t = getUi(lang);
+
+const rawVideoUrl = data.gameplayVideo;
+
+function getYouTubeEmbedUrl(url: string): string | null {
+  try {
+    if (url.includes('youtube.com/embed/')) {
+      return url;
+    }
+
+    const parsedUrl = new URL(url);
+
+    if (
+      parsedUrl.hostname.includes('youtube.com')
+    ) {
+      const videoId =
+        parsedUrl.searchParams.get('v');
+
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    if (parsedUrl.hostname.includes('youtu.be')) {
+      const videoId =
+        parsedUrl.pathname.replace('/', '');
+
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+const embedUrl = rawVideoUrl
+  ? getYouTubeEmbedUrl(rawVideoUrl)
+  : null;
 ---
 
-{data.gameplayVideo && (
-  <section class="project-section">
-    <h2>{t.project.gameplay}</h2>
+{embedUrl && (
+  <section class="project-section project-gameplay-video">
 
-    <video
-      class="project-video"
-      controls
-      playsinline
-    >
-      <source src={data.gameplayVideo} />
-    </video>
+    <div class="project-gameplay-video__frame">
+      <iframe
+        class="project-gameplay-video__embed"
+        src={embedUrl}
+        title={`${data.title} gameplay video`}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
   </section>
 )}

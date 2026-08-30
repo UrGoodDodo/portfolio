@@ -125,6 +125,38 @@ const contentBody = contentEntry?.body ?? '';
               />
             );
 
+          case 'overview': {
+            const content =
+              await renderMarkdownSection(
+                contentBody,
+                section
+              );
+
+            return (
+              <MarkdownSection
+                title={getSectionTitle(lang, section)}
+                content={content}
+                variant="overview"
+              />
+            );
+          }
+
+          case 'technical-breakdown': {
+            const content =
+              await renderMarkdownSection(
+                contentBody,
+                section
+              );
+
+            return (
+              <MarkdownSection
+                title={getSectionTitle(lang, section)}
+                content={content}
+                variant="technical"
+              />
+            );
+          }
+
           default: {
             const content =
               await renderMarkdownSection(
@@ -136,6 +168,7 @@ const contentBody = contentEntry?.body ?? '';
               <MarkdownSection
                 title={getSectionTitle(lang, section)}
                 content={content}
+                variant="default"
               />
             );
           }
