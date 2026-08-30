@@ -1,6 +1,7 @@
 ---
 import '../../styles/home.css';
 import '../../styles/projects.css';
+import { withBase } from '../../utils/basePath';
 
 import ProjectCard from '../ProjectCard.astro';
 
@@ -36,6 +37,12 @@ const data = page.data;
 
 const latestProjects =
   await getLatestProjectsByLanguage(lang, 3);
+
+const projectsUrl = withBase(`/${lang}/projects`);
+const aboutUrl = withBase(`/${lang}/about`);
+
+const heroImageUrl = withBase('/images/home/hero.jpg');
+const aboutImageUrl = withBase('/images/home/about.jpg');
 ---
 
 <section class="home-hero">
@@ -57,14 +64,14 @@ const latestProjects =
     <div class="home-hero__actions">
       <a
         class="button button--primary"
-        href={`/${lang}/projects`}
+        href={projectsUrl}
       >
         {t.common.viewAllProjects}
       </a>
 
       <a
         class="button button--secondary"
-        href={`/${lang}/about`}
+        href={aboutUrl}
       >
         {t.common.aboutMe}
       </a>
@@ -73,7 +80,7 @@ const latestProjects =
 
   <div class="home-hero__image">
     <img
-      src="/images/home/hero.jpg"
+      src={heroImageUrl}
       alt={t.site.name}
     />
   </div>
@@ -86,7 +93,7 @@ const latestProjects =
       {t.common.latestProjects}
     </h2>
 
-    <a href={`/${lang}/projects`}>
+    <a href={projectsUrl}>
       {t.common.viewAllProjects} →
     </a>
   </div>
@@ -106,7 +113,7 @@ const latestProjects =
   <section class="home-section home-about">
     <div class="home-about__image">
       <img
-        src="/images/home/about.jpg"
+        src={aboutImageUrl}
         alt={t.site.name}
       />
     </div>
@@ -120,7 +127,7 @@ const latestProjects =
         {data.about.text}
       </p>
 
-      <a href={`/${lang}/about`}>
+      <a href={aboutUrl}>
         {t.common.aboutMe} →
       </a>
     </div>

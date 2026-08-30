@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '../i18n/config';
+import { withBase } from '../utils/basePath';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -11,13 +12,20 @@ const { project, lang } = Astro.props;
 const data = project.data;
 
 const [, slug] = project.id.split('/');
+const projectUrl = withBase(
+  `/${lang}/projects/${slug}`
+);
+
+const coverUrl = withBase(
+  data.cover
+);
 ---
 
 <article class="project-card">
-  <a href={`/${lang}/projects/${slug}`}>
+  <a href={projectUrl}>
     <div class="project-card__image">
       <img
-        src={data.cover}
+        src={coverUrl}
         alt={data.title}
       />
     </div>
