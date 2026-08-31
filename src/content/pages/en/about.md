@@ -10,7 +10,7 @@ background:
   text: "It all started with programming. I studied at a technical university, where I gained a strong foundation in software development and problem-solving. I later continued my education in a master's program, specializing in game development. Over time, I became increasingly interested in going beyond purely technical work and exploring the creative side of development, expanding my skills and trying myself in related fields."
 
 areas:
-  title: "Fields of activity"
+  title: "Areas of Focus"
 
   items:
     - title: "Programming"
@@ -31,7 +31,7 @@ education:
     organization: "Southern Federal University"
     year: "2026"
     logo: "/images/education/sfedu.png"
-    description: "Focused on game development, real-time technologies, interactive systems and practical project work."
+    description: "Focused on game development, interactive systems and project work."
 
   bachelor:
     title: "Bachelor’s Degree"
