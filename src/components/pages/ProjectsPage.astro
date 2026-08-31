@@ -19,16 +19,18 @@ const t = getUi(lang);
 const projects = await getProjectsByLanguage(lang);
 ---
 
-<section class="projects-page__header">
-  <h1>{t.projectsPage.title}</h1>
-  <p>{t.projectsPage.description}</p>
-</section>
+<div class="projects-page">
+  <section class="projects-page__header">
+    <h1>{t.projectsPage.title}</h1>
+    <p>{t.projectsPage.description}</p>
+  </section>
 
-<section class="projects-grid">
-  {projects.map((project) => (
-    <ProjectCard
-      project={project}
-      lang={lang}
-    />
-  ))}
-</section>
+  <section class="projects-grid">
+    {projects.map((project) => (
+      <ProjectCard
+        project={project}
+        lang={lang}
+      />
+    ))}
+  </section>
+</div>

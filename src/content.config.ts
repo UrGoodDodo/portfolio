@@ -71,6 +71,7 @@ const pages = defineCollection({
 
   schema: z.object({
     title: z.string(),
+    heading: z.string().optional(),
 
     subtitle: z.string().optional(),
     intro: z.string().optional(),
@@ -109,13 +110,19 @@ const pages = defineCollection({
         master: z.object({
           title: z.string(),
           degree: z.string(),
+          organization: z.string(),
+          logo: z.string(),
           description: z.string(),
+          year: z.string(),
         }),
 
         bachelor: z.object({
           title: z.string(),
           degree: z.string(),
+          organization: z.string(),
+          logo: z.string(),
           description: z.string(),
+          year: z.string(),
         }),
       })
       .optional(),
@@ -123,7 +130,15 @@ const pages = defineCollection({
     courses: z
       .object({
         title: z.string(),
-        items: z.array(z.string()),
+
+        items: z.array(
+          z.object({
+            title: z.string(),
+            organization: z.string(),
+            year: z.string(),
+            logo: z.string(),
+          })
+        ),
       })
       .optional(),
 

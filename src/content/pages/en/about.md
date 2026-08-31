@@ -1,47 +1,74 @@
 ---
 title: "About Me"
 
-intro: "I am a game developer with a background in programming and a focus on game development, technical art and interactive systems."
+heading: "I'm Kirill Zinnatullin"
+
+intro: "A game developer with a background in programming and a focus on game development, technical art and interactive systems."
 
 background:
   title: "Background"
-  text: "I started with a background in programming, where I developed a strong foundation in software development and problem solving. I later continued my education in game development, expanding my focus toward real-time systems, procedural techniques, technical art, level design and interactive experiences."
+  text: "It all started with programming. I studied at a technical university, where I gained a strong foundation in software development and problem-solving. I later continued my education in a master's program, specializing in game development. Over time, I became increasingly interested in going beyond purely technical work and exploring the creative side of development, expanding my skills and trying myself in related fields."
 
 areas:
-  title: "What I Do"
+  title: "Fields of activity"
 
   items:
     - title: "Programming"
-      text: "Gameplay systems, tools, procedural geometry, application logic and interactive systems."
+      text: "Gameplay systems, tools, application logic and system interactivity."
 
     - title: "Technical Art"
-      text: "Runtime geometry, procedural systems, shaders, materials and technical workflows."
+      text: "Runtime geometry, procedural systems, shaders, materials and optimization."
 
-    - title: "Level & Visual Design"
-      text: "Level design, visual storytelling, cinematics, lighting and interactive environments."
+    - title: "Design"
+      text: "Game design, Level design, idea/concept creation, cinematic development, lighting and rendering."
 
 education:
   title: "Education"
 
   master:
     title: "Master’s Degree"
-    degree: "Game Development"
+    degree: "Development of mobile applications and computer games"
+    organization: "Southern Federal University"
+    year: "2026"
+    logo: "/images/education/sfedu.png"
     description: "Focused on game development, real-time technologies, interactive systems and practical project work."
 
   bachelor:
     title: "Bachelor’s Degree"
-    degree: "Programming"
+    degree: "Fundamental Computer Science and Information Technology"
+    organization: "Southern Federal University"
+    year: "2024"
+    logo: "/images/education/sfedu.png"
     description: "Built a strong foundation in software development, programming principles and application development."
 
 courses:
   title: "Additional Education"
 
   items:
-    - "Introduction to Sound Design"
-    - "Sound Design for Games and Video"
-    - "Directing in Unreal Engine"
-    - "Visual Storytelling"
-    - "Virtual Space in Unreal Engine"
+    - title: "Sound Design for Games and Video"
+      organization: "XSSR Academy"
+      year: "2026"
+      logo: "/images/education/xssr.svg"
+
+    - title: "Introduction to Sound Design"
+      organization: "XSSR Academy"
+      year: "2026"
+      logo: "/images/education/xssr.svg"
+
+    - title: "Visual Storytelling"
+      organization: "National Research University Higher School of Economics"
+      year: "2025"
+      logo: "/images/education/hse.svg"
+
+    - title: "Directing in Unreal Engine"
+      organization: "National Research University Higher School of Economics"
+      year: "2025"
+      logo: "/images/education/hse.svg"
+
+    - title: "Virtual Space in Unreal Engine"
+      organization: "National Research University Higher School of Economics"
+      year: "2024"
+      logo: "/images/education/hse.svg"
 
 technologies:
   title: "Tools & Technologies"
@@ -49,23 +76,42 @@ technologies:
   creative:
     title: "Creative"
     items:
-      - "Unity"
-      - "Unreal Engine"
-      - "Shader Graph"
+      - "Shader Graph/Material Graph"
       - "Lighting"
       - "Level Design"
       - "Cinematics"
-      - "Visual Storytelling"
+      - "Adobe Photoshop"
+      - "Adobe Illustrator"
+      - "Adobe Substance 3D Painter"
+      - "Figma"
+      - "Blender"
+      - "3ds Max"
+      - "CAD"
+      - "DAW"
 
   development:
     title: "Development"
     items:
+      - "C"
+      - "C++"
+      - "OpenGl"
+      - "Unreal Engine"
       - "C#"
+      - "WinForms"
+      - "WPF"
+      - "Unity"
+      - "Js"
+      - "WebGl"
       - "Python"
+      - "Ruby"
+      - "Ruby on rails"
+      - "Html"
+      - "Css"
+      - "Pascal"
+      - "Prolog"
       - "Git"
       - "Docker"
-      - "PostgreSQL"
-      - "Procedural Geometry"
+
 
 contact:
   title: "Contact"

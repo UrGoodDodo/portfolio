@@ -1,5 +1,16 @@
 /* ---------------- PROJECT PRESENTATION ---------------- */
 
+.project-presentation {
+  width: 100%;
+
+  padding-bottom:
+    clamp(
+      2.5rem,
+      4vw,
+      4rem
+    );
+}
+
 .project-presentation__header {
   display: flex;
 

@@ -1,4 +1,13 @@
 /* ---------------- PROJECTS PAGE ---------------- */
+.projects-page {
+  padding-bottom:
+    clamp(
+      3rem,
+      5vw,
+      5rem
+    );
+}
+
 
 .projects-page__header {
   max-width: 50rem;

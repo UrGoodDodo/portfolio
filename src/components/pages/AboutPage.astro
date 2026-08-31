@@ -42,8 +42,8 @@ const data = page.data;
       {data.title}
     </p>
 
-    <h1>
-      {t.site.name}
+    <h1 class="about-hero__title">
+      {data.heading ?? t.site.name}
     </h1>
 
     <p class="about-hero__intro">
@@ -55,10 +55,6 @@ const data = page.data;
 
 {data.background && (
   <section class="about-section about-background">
-    <div class="about-section__label">
-      {data.background.title}
-    </div>
-
     <div class="about-background__content">
       <h2>
         {data.background.title}
@@ -115,16 +111,33 @@ const data = page.data;
           01
         </div>
 
+        <div class="about-education__logo about-education__logo--primary">
+          <img
+            src={withBase(data.education.master.logo)}
+            alt={data.education.master.organization}
+          />
+        </div>
+
         <div class="about-education__content">
-          <h3>
-            {data.education.master.title}
-          </h3>
+          <div class="about-education__heading">
+            <h3>
+              {data.education.master.title}
+            </h3>
+
+            <span class="about-education__year">
+              {data.education.master.year}
+            </span>
+          </div>
 
           <p class="about-education__degree">
             {data.education.master.degree}
           </p>
 
-          <p>
+          <p class="about-education__organization">
+            {data.education.master.organization}
+          </p>
+
+          <p class="about-education__description">
             {data.education.master.description}
           </p>
         </div>
@@ -135,16 +148,33 @@ const data = page.data;
           02
         </div>
 
+        <div class="about-education__logo about-education__logo--primary">
+          <img
+            src={withBase(data.education.bachelor.logo)}
+            alt={data.education.bachelor.organization}
+          />
+        </div>
+
         <div class="about-education__content">
-          <h3>
-            {data.education.bachelor.title}
-          </h3>
+          <div class="about-education__heading">
+            <h3>
+              {data.education.bachelor.title}
+            </h3>
+
+            <span class="about-education__year">
+              {data.education.bachelor.year}
+            </span>
+          </div>
 
           <p class="about-education__degree">
             {data.education.bachelor.degree}
           </p>
 
-          <p>
+          <p class="about-education__organization">
+            {data.education.bachelor.organization}
+          </p>
+
+          <p class="about-education__description">
             {data.education.bachelor.description}
           </p>
         </div>
@@ -155,18 +185,43 @@ const data = page.data;
 
 
 {data.courses && (
-  <section class="about-section">
+  <section class="about-section about-section--courses">
     <div class="about-section__header">
       <h2>
         {data.courses.title}
       </h2>
     </div>
 
-    <div class="about-courses">
-      {data.courses.items.map((course) => (
-        <div class="about-course">
-          {course}
-        </div>
+    <div class="about-education">
+      {data.courses.items.map((course, index) => (
+        <article class="about-education__item">
+          <div class="about-education__index">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+
+          <div class="about-education__logo">
+            <img
+              src={withBase(course.logo)}
+              alt={course.organization}
+            />
+          </div>
+
+          <div class="about-education__content">
+            <div class="about-education__heading">
+              <h3>
+                {course.title}
+              </h3>
+
+              <span class="about-education__year">
+                {course.year}
+              </span>
+            </div>
+
+            <p class="about-education__organization">
+              {course.organization}
+            </p>
+          </div>
+        </article>
       ))}
     </div>
   </section>
@@ -174,7 +229,7 @@ const data = page.data;
 
 
 {data.technologies && (
-  <section class="about-section">
+  <section class="about-section about-section--technologies">
     <div class="about-section__header">
       <h2>
         {data.technologies.title}

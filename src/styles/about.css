@@ -1,11 +1,12 @@
 /* ---------------- HERO ---------------- */
 
 .about-hero {
-  min-height: clamp(
-    32rem,
-    65svh,
-    48rem
-  );
+  min-height:
+    clamp(
+      32rem,
+      65svh,
+      48rem
+    );
 
   display: grid;
 
@@ -15,11 +16,12 @@
 
   align-items: center;
 
-  gap: clamp(
-    3rem,
-    7vw,
-    9rem
-  );
+  gap:
+    clamp(
+      3rem,
+      7vw,
+      9rem
+    );
 
   padding-block:
     clamp(
@@ -31,16 +33,17 @@
 
 .about-hero__image {
   width: 100%;
-
   max-width: 34rem;
 
   aspect-ratio: 4 / 5;
 
   overflow: hidden;
 
-  border-radius: var(--radius-md);
+  border-radius:
+    var(--radius-md);
 
-  background: var(--color-surface);
+  background:
+    var(--color-surface);
 }
 
 .about-hero__image img {
@@ -60,7 +63,8 @@
     0
     1rem;
 
-  color: var(--color-accent);
+  color:
+    var(--color-accent);
 
   font-size: 0.9rem;
   font-weight: 600;
@@ -69,13 +73,22 @@
   text-transform: uppercase;
 }
 
-.about-hero h1 {
+.about-hero__title {
   margin-bottom:
     clamp(
       1rem,
       2vw,
       1.75rem
     );
+
+  font-size:
+    clamp(
+      2rem,
+      4.5vw,
+      4.5rem
+    );
+
+  white-space: nowrap;
 }
 
 .about-hero__intro {
@@ -83,11 +96,12 @@
 
   margin: 0;
 
-  font-size: clamp(
-    1.1rem,
-    1.6vw,
-    1.4rem
-  );
+  font-size:
+    clamp(
+      1.1rem,
+      1.6vw,
+      1.4rem
+    );
 }
 
 
@@ -100,6 +114,11 @@
   border-top:
     1px solid
     var(--color-border);
+}
+
+.about-section--courses,
+.about-section--technologies {
+  border-top: 0;
 }
 
 .about-section__header {
@@ -116,7 +135,8 @@
 }
 
 .about-section__label {
-  color: var(--color-text-muted);
+  color:
+    var(--color-text-muted);
 
   font-size: 0.875rem;
 
@@ -128,29 +148,35 @@
 /* ---------------- BACKGROUND ---------------- */
 
 .about-background {
-  display: grid;
-
-  grid-template-columns:
-    minmax(8rem, 0.5fr)
-    minmax(0, 2fr);
-
-  gap: clamp(
-    2rem,
-    6vw,
-    8rem
-  );
+  display: flex;
+  justify-content: center;
 }
 
 .about-background__content {
-  max-width: 55rem;
+  width: 100%;
+  max-width: 68rem;
+}
+
+.about-background__content h2 {
+  margin-bottom:
+    clamp(
+      1.75rem,
+      3vw,
+      2.75rem
+    );
 }
 
 .about-background__content p {
-  font-size: clamp(
-    1.05rem,
-    1.5vw,
-    1.3rem
-  );
+  margin-bottom: 0;
+
+  font-size:
+    clamp(
+      1.15rem,
+      1.7vw,
+      1.45rem
+    );
+
+  line-height: 1.65;
 }
 
 
@@ -192,7 +218,8 @@
 }
 
 .about-area > span {
-  color: var(--color-text-muted);
+  color:
+    var(--color-text-muted);
 
   font-size: 0.8rem;
 }
@@ -223,15 +250,18 @@
   display: grid;
 
   grid-template-columns:
-    minmax(4rem, 0.3fr)
-    minmax(0, 2fr);
+    minmax(2.5rem, auto)
+    minmax(7rem, 8rem)
+    minmax(0, 1fr);
 
   gap:
     clamp(
-      1.5rem,
-      4vw,
-      5rem
+      1.25rem,
+      3vw,
+      2.75rem
     );
+
+  align-items: start;
 
   padding-block:
     clamp(
@@ -246,54 +276,107 @@
 }
 
 .about-education__index {
-  color: var(--color-text-muted);
+  padding-top: 0.25rem;
+
+  color:
+    var(--color-text-muted);
 
   font-size: 0.8rem;
 }
 
-.about-education__content {
-  max-width: 55rem;
+.about-education__logo {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  min-width: 0;
 }
 
-.about-education__content h3 {
-  margin-bottom: 0.5rem;
+.about-education__logo img {
+  display: block;
+
+  width: 7rem;
+  height: 7rem;
+
+  object-fit: contain;
+}
+
+.about-education__logo--primary img {
+  width: 8rem;
+  height: 8rem;
+}
+
+.about-education__content {
+  width: 100%;
+  max-width: 55rem;
+
+  min-width: 0;
+}
+
+.about-education__heading {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: space-between;
+
+  gap:
+    clamp(
+      1rem,
+      3vw,
+      3rem
+    );
+}
+
+.about-education__heading h3 {
+  margin:
+    0
+    0
+    0.5rem;
+}
+
+.about-education__year {
+  flex-shrink: 0;
+
+  color:
+    var(--color-text-muted);
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  font-variant-numeric:
+    tabular-nums;
 }
 
 .about-education__degree {
   margin:
     0
     0
-    1rem;
+    0.35rem;
 
-  color: var(--color-text);
+  color:
+    var(--color-text);
 
   font-weight: 500;
 }
 
+.about-education__organization {
+  margin:
+    0
+    0
+    1rem;
 
-/* ---------------- COURSES ---------------- */
+  color:
+    var(--color-text-muted);
 
-.about-courses {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-.about-course {
-  padding:
-    0.65rem
-    0.9rem;
+.about-education__description {
+  max-width: 48rem;
 
-  border:
-    1px solid
-    var(--color-border);
-
-  border-radius: var(--radius-sm);
-
-  color: var(--color-text-secondary);
-
-  background: var(--color-surface);
+  margin-bottom: 0;
 }
 
 
@@ -330,6 +413,7 @@
 
 .about-technology__items {
   display: flex;
+
   flex-wrap: wrap;
 
   gap: 0.6rem;
@@ -346,7 +430,8 @@
 
   border-radius: 999rem;
 
-  color: var(--color-text-secondary);
+  color:
+    var(--color-text-secondary);
 
   font-size: 0.875rem;
 }
@@ -363,11 +448,12 @@
 
   margin-bottom: 2rem;
 
-  font-size: clamp(
-    1rem,
-    1.5vw,
-    1.2rem
-  );
+  font-size:
+    clamp(
+      1rem,
+      1.5vw,
+      1.2rem
+    );
 }
 
 .about-contact__button {
@@ -421,7 +507,8 @@
   .about-hero {
     min-height: auto;
 
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
 
     gap: 2.5rem;
 
@@ -438,13 +525,15 @@
   }
 
   .about-background {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
 
     gap: 1rem;
   }
 
   .about-areas {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .about-area {
@@ -464,12 +553,49 @@
   }
 
   .about-education__item {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      minmax(2.25rem, auto)
+      minmax(4rem, 4.5rem)
+      minmax(0, 1fr);
 
-    gap: 1rem;
+    gap: 0.9rem;
+  }
+
+  .about-education__logo img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .about-education__logo--primary img {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+
+  .about-education__heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.25rem;
+  }
+
+  .about-education__year {
+    margin-bottom: 0.25rem;
   }
 
   .about-technologies {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
+  }
+}
+
+@media (max-width: 30rem) {
+  .about-hero__title {
+    font-size:
+      clamp(
+        1.65rem,
+        7vw,
+        2.25rem
+      );
   }
 }

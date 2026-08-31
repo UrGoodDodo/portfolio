@@ -40,4 +40,10 @@ gallery:
 links:
   - label: "Video"
     url: "https://drive.google.com/file/d/1y99Hw5NO73KE5G-jy1OXnNbsfOEztHJ6/view?usp=drive_link"
+    
+  - label: "Full Cinematic"
+    url: "..."
+
+  - label: "Playable Build"
+    url: "..."
 ---
