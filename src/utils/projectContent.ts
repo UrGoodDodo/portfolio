@@ -1,6 +1,8 @@
 import { getCollection } from 'astro:content';
 import { marked } from 'marked';
 
+import { withBase } from './basePath';
+
 import type { Language } from '../i18n/config';
 
 export async function getProjectContent(
@@ -113,5 +115,106 @@ export async function renderMarkdownSection(
     return null;
   }
 
-  return await marked.parse(section);
+  const renderer = new marked.Renderer();
+
+  renderer.image = ({ href, title, text }) => {
+    const src =
+      href.startsWith('/')
+        ? withBase(href)
+        : href;
+
+    const allowedLayouts = new Set([
+      'default',
+      'left',
+      'right',
+      'wide',
+      'contained',
+      'half',
+    ]);
+
+    const layout =
+      title && allowedLayouts.has(title)
+        ? title
+        : 'default';
+
+    return `
+      <img
+        src="${src}"
+        alt="${text}"
+        class="markdown-image markdown-image--${layout}"
+      >
+    `;
+  };
+
+  const preparedSection =
+    renderHalfImagePairs(section);
+
+  return await marked.parse(preparedSection, {
+    renderer,
+  });
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function renderHalfImagePairs(
+  markdown: string
+): string {
+  const lines = markdown.split('\n');
+
+  const result: string[] = [];
+
+  const halfImagePattern =
+    /^!\[(.*?)\]\((\S+)\s+"half"\)\s*$/;
+
+  for (let i = 0; i < lines.length; i++) {
+    const first =
+      lines[i].match(halfImagePattern);
+
+    const second =
+      lines[i + 1]?.match(halfImagePattern);
+
+    if (first && second) {
+      const [, firstAlt, firstHref] = first;
+      const [, secondAlt, secondHref] = second;
+
+      const firstSrc =
+        firstHref.startsWith('/')
+          ? withBase(firstHref)
+          : firstHref;
+
+      const secondSrc =
+        secondHref.startsWith('/')
+          ? withBase(secondHref)
+          : secondHref;
+
+      result.push(`
+<div class="markdown-image-pair">
+  <img
+    src="${firstSrc}"
+    alt="${escapeHtml(firstAlt)}"
+    class="markdown-image markdown-image--half"
+  >
+  <img
+    src="${secondSrc}"
+    alt="${escapeHtml(secondAlt)}"
+    class="markdown-image markdown-image--half"
+  >
+</div>
+`);
+
+      i++;
+
+      continue;
+    }
+
+    result.push(lines[i]);
+  }
+
+  return result.join('\n');
 }

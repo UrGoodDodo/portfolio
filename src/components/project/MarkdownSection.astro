@@ -12,6 +12,8 @@ const {
   content,
   variant = 'default',
 } = Astro.props;
+
+const showTitle = variant === 'default';
 ---
 
 {content && (
@@ -22,9 +24,11 @@ const {
       `markdown-section--${variant}`,
     ]}
   >
-    <h2 class="markdown-section__title">
-      {title}
-    </h2>
+    {showTitle && (
+      <h2 class="markdown-section__title">
+        {title}
+      </h2>
+    )}
 
     <div
       class="project-section__content"

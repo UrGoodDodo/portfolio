@@ -1,218 +1,127 @@
 ## overview
 
-Procedural Mesh Slicing is a **runtime destruction system** developed in *Unity*.
+The project is a procedural destruction system developed in Unity as part of my master's thesis.
 
-The main goal of the project was to create a system capable of dynamically splitting arbitrary 3D meshes while generating geometry for newly exposed surfaces.
+It includes polygon mesh slicing, cut-surface reconstruction, Voronoi fracturing, and procedural materials for newly exposed interior surfaces. The same geometry-processing pipeline can be used both for precomputed fracturing and for runtime execution.
 
-The system was developed as part of my research into **procedural destruction and runtime geometry manipulation**.
+![Overview](/images/projects/procedural-destruction/overview.gif "default")
 
-### Main Goals
-
-The project focused on several key goals:
-
-- Runtime mesh slicing
-- Support for repeated cuts
-- Automatic generation of cut surfaces
-- Correct triangle orientation
-- Support for different materials
-
-The final system consists of several interconnected stages.
-
----
+At the core of the system is a reusable mesh slicing and clipping pipeline that processes polygonal geometry, reconstructs closed surfaces after cuts, and serves as the foundation for building Voronoi fragments.
 
 ## technical-breakdown
 
-The slicing algorithm is divided into several stages.
+### System Overview
 
-### 1. Vertex Classification
+The system is built around a shared geometry-processing pipeline.
 
-Each vertex is classified relative to the cutting plane.
+![Voronoi Fracturing](/images/projects/procedural-destruction/en_voronoi.svg "half")
+![Mesh Slicing](/images/projects/procedural-destruction/en_meshslicing.svg "half")
 
-A vertex can belong to one of three categories:
 
-- **Positive side**
-- **Negative side**
-- **On the cutting plane**
+Mesh slicing is used both as a standalone destruction method and as a reusable operation for constructing Voronoi cells.
 
-A small epsilon value is used to avoid numerical instability.
+The final pipeline can be applied in different ways depending on the needs of the project. Fragments can be prepared in advance or generated dynamically at runtime using the same underlying geometry-processing system.
 
-> Correct vertex classification is important because every later stage of the slicing algorithm depends on it.
+### Mesh Slicing
 
-The classification result can conceptually be represented as:
+The slicing pipeline begins by classifying mesh vertices relative to the cutting plane.
 
-```text
-distance > epsilon   → Positive
-distance < -epsilon  → Negative
-otherwise            → On Plane
-```
+![Overview](/images/projects/procedural-destruction/points.gif "right")
 
-### 2. Triangle Classification
+Each vertex is assigned to one of three states:
 
-After classifying the vertices, every triangle is analyzed.
+- Positive side
+- Negative side
+- On the plane
 
-For example:
+After classification, the triangles of the original mesh are processed. Triangles located entirely on one side of the plane can be transferred unchanged, while intersected triangles are split and reconstructed using newly created intersection points.
 
-1. All vertices above the plane → triangle belongs to the **top mesh**
-2. All vertices below the plane → triangle belongs to the **bottom mesh**
-3. Vertices on different sides → triangle must be **split**
+As a result, two separate parts of the original mesh are formed.
 
-Some special cases also have to be handled:
+#### Edge Intersection Points
 
-- one vertex directly on the plane;
-- two vertices directly on the plane;
-- degenerate intersections.
+When an edge intersects the cutting plane, a new vertex is created at the intersection point.
 
-### 3. Edge Intersection
+The position of this vertex is calculated by interpolation along the original edge. The same interpolation parameter is used to preserve mesh attributes, such as the UV coordinates of newly created vertices.
 
-When an edge crosses the cutting plane, a new intersection point is calculated.
+Intersection results are reused for shared edges so that neighboring triangles reference consistent geometry and do not create duplicate intersection points.
 
-Instead of calculating the same intersection multiple times, the system uses an `EdgeCache`.
+### Surface Reconstruction
 
-For example:
+![Surface Reconstruction](/images/projects/procedural-destruction/en_restore.svg "right")
 
-```csharp
-if (edgeCache.TryGetValue(edge, out Vector3 point))
-{
-    return point;
-}
-```
+Slicing a polygon mesh creates open boundaries because the original model represents only the exterior shell of the object.
 
-This helps prevent **duplicate vertices** and ensures that adjacent triangles share the same intersection points.
+To produce closed fragments, the system reconstructs the newly exposed surface.
 
-### 4. Contour Reconstruction
+Edges created while processing intersected triangles are collected and connected into contours that describe the boundaries of newly exposed regions.
 
-Intersection edges are collected during slicing.
+The contours are validated and projected into two-dimensional space, where the resulting regions can be triangulated before the new geometry is added back to the final mesh.
 
-These edges are then connected into **closed contour loops**.
+#### Triangulation
 
-Conceptually:
+Several approaches to surface triangulation were considered during development.
 
-```text
-Intersection Points
-        ↓
-Contour Edges
-        ↓
-Closed Loops
-        ↓
-Cap Geometry
-```
+Simple strategies worked well for regular and convex contours but became less reliable when dealing with concave shapes, nearly collinear vertices, repeated cuts, and more complex regions.
 
-A contour represents the boundary of a newly exposed surface.
+![Triangulation](/images/projects/procedural-destruction/triangulation.webp "wide")
 
-### 5. Cap Triangulation
 
-After reconstructing the contour, the system needs to fill the resulting hole.
 
-The contour is projected into 2D space and triangulated.
+The final system therefore uses a more robust constrained-triangulation-based approach for reconstructing irregular cut surfaces.
 
-The current implementation uses an **ear-clipping algorithm**.
+#### Surface Classification
 
-Important cases include:
+The system distinguishes between geometry inherited from the original object and geometry created during the destruction process.
 
-- convex vertices;
-- concave vertices;
-- collinear vertices;
-- triangle orientation.
+Original exterior surfaces remain in the main group, while reconstructed cut surfaces are classified separately as newly exposed interior geometry.
 
----
+In simplified form:
 
-## level-design
+![Classification](/images/projects/procedural-destruction/en_classification.svg "default")
 
-Although this project is primarily focused on **programming and technical art**, the resulting destruction system can also influence level design.
+This separation makes it possible to keep geometry processing independent from its visual representation.
 
-For example, runtime destruction could be used for:
+### Voronoi Fracturing
 
-- destructible walls;
-- dynamic environmental obstacles;
-- alternative player routes;
-- interactive level geometry.
+Voronoi fracturing is built on top of the same clipping pipeline used for direct slicing.
 
-### Gameplay Example
+Each seed point corresponds to a future fragment. For each point, the system constructs the corresponding Voronoi cell by sequentially clipping the original mesh with bisector planes between the current seed point and neighboring points.
 
-Imagine a level containing two possible paths:
+The process can be represented as follows:
 
-1. The player can use the normal corridor.
-2. The player can destroy part of a wall and create an alternative route.
+![Fracturing](/images/projects/procedural-destruction/en_fragmentation.svg "contained")
 
-This means destruction can become part of the **level-design language**, rather than being purely a visual effect.
+Instead of implementing Voronoi fracturing as a completely separate geometry system, the project reuses the existing mesh-clipping mechanism: essentially the same mesh-slicing operation, but only the required side of the mesh is kept after each cut.
 
----
+#### Seed Point Distribution
 
-## challenges
+The placement of seed points directly affects the character of the destruction.
 
-Several technical challenges appeared during development.
+Points can be distributed throughout the volume of the object or concentrated around a specific area of impact.
 
-### Repeated Slicing
+This makes it possible to produce different destruction patterns:
 
-One of the main requirements was allowing already sliced objects to be sliced again.
+- Larger and more evenly distributed fragments
+- Localized destruction around the impact point
 
-This creates additional problems:
+As a result, the number and placement of seed points become parameters that control the fragmentation pattern.
 
-- previously generated cap geometry must be preserved;
-- new intersections may occur on old cut surfaces;
-- material information must remain correct.
+![Seed Points](/images/projects/procedural-destruction/seed.gif "wide")
 
-### Concave Contours
+### Optimization
 
-Simple fan triangulation works well for convex polygons but can produce invalid geometry for concave shapes.
+Procedural fracturing can be computationally expensive, especially when a large number of Voronoi cells is involved.
 
-For this reason, the project moved toward **ear clipping**.
+To improve the system architecture, geometry processing was separated from Unity scene objects and moved into an independent data representation.
 
-### Collinear Vertices
+In simplified form: ![Fracturing](/images/projects/procedural-destruction/en_optimization.svg "contained")
 
-Another problem occurs when several contour vertices lie almost on the same line.
+This separation allows computational geometry operations to be performed without directly interacting with Unity components during the calculation stage.
 
-These vertices can produce extremely small or degenerate triangles.
+#### Parallel Processing
 
-> This was one of the cases where a geometrically correct algorithm still required additional numerical robustness.
+Because Voronoi cells are independent of one another while they are being constructed, their generation can be performed in parallel, after which the resulting geometry is converted back into Unity Mesh objects. This approach reduces the dependency of the computational part on Unity's main pipeline and provides a more suitable foundation for resource-intensive fracturing operations.
 
----
-
-## results
-
-The resulting prototype is capable of:
-
-- dynamically splitting meshes;
-- generating intersection vertices;
-- reconstructing cut contours;
-- generating cap geometry;
-- assigning separate materials to exposed surfaces.
-
-### Current Limitations
-
-The project still has several areas that could be improved:
-
-- Performance on very complex meshes
-- Handling meshes with complicated internal cavities
-- Multiple simultaneous destruction events
-- More advanced procedural materials
-
-### Future Work
-
-Possible future improvements include:
-
-1. Optimization of the slicing pipeline
-2. Improved contour simplification
-3. More robust triangulation
-4. Procedural cut-surface materials
-5. Integration with gameplay systems
-
----
-
-## media-test
-
-This section exists specifically to test Markdown media.
-
-### Image
-
-![Mesh slicing example](/images/mesh-slicing.gif)
-
-### Link
-
-The project was developed using [Unity](https://unity.com/).
-
-### Inline Formatting
-
-This sentence contains **bold text**, *italic text*, and `inline code`.
-
-You can also combine formatting, such as ***bold and italic text***.
+### Results
+![Results](/images/projects/procedural-destruction/fragmentation.gif "wide")

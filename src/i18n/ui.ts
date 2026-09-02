@@ -119,7 +119,7 @@ export const ui: Record<Language, UiDictionary> = {
 
     sectionTitles: {
       overview: 'Обзор',
-      'technical-breakdown': 'Техническая часть',
+      'technical-breakdown': 'Технический разбор',
       'level-design': 'Левел-дизайн',
       challenges: 'Сложности',
       results: 'Результаты',

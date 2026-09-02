@@ -18,21 +18,286 @@
   margin-inline: auto;
 }
 
+.project-section__content::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .project-section__content p,
 .project-section__content li {
   color:
-    var(--color-text-secondary);
+    #d8d8d8;
 }
 
+.project-section__content ul,
+.project-section__content ol {
+  padding-left: 1.4rem;
+}
+
+.project-section__content li + li {
+  margin-top: 0.35rem;
+}
+
+.project-section__content code {
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+
+/* ---------------- MARKDOWN IMAGES ---------------- */
+
+.project-section__content p:has(> .markdown-image) {
+  margin-block:
+    clamp(
+      2rem,
+      4vw,
+      3.5rem
+    );
+}
+
+.markdown-image {
+  display: block;
+  height: auto;
+
+  border-radius:
+    0.15rem;
+}
+
+.markdown-image--default {
+  width: 60%;
+  margin-inline: auto;
+  padding-bottom: 1.4rem;
+}
+
+.markdown-image--wide {
+  width: 100%;
+  padding-bottom: 1.4rem;
+}
+
+.markdown-image--contained {
+  width:
+    min(
+      100%,
+      25rem
+    );
+
+  margin-inline: auto;
+  padding-bottom: 1.4rem;
+}
+
+.markdown-image--left {
+  float: left;
+
+  width:
+    min(
+      46%,
+      32rem
+    );
+
+  margin:
+    0.5rem
+    2rem
+    1.5rem
+    0;
+}
+
+.markdown-image--right {
+  float: right;
+
+  width:
+    min(
+      35%,
+      25rem
+    );
+
+  margin:
+    0.5rem
+    0
+    1.5rem
+    2rem;
+}
+
+
+/* ---------------- HALF IMAGE PAIR ---------------- */
+
+.markdown-image-pair {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  align-items: start;
+
+  gap:
+    clamp(
+      1.5rem,
+      3vw,
+      2.5rem
+    );
+
+  width: 100%;
+  max-width: 60rem;
+
+  margin:
+    clamp(
+      3rem,
+      5vw,
+      4.5rem
+    )
+    auto;
+}
+
+.markdown-image-pair
+.markdown-image--half {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* ---------------- OVERVIEW ---------------- */
+
+.markdown-section--overview
+.project-section__content {
+  max-width:
+    68rem;
+}
+
+.markdown-section--overview
+.project-section__content p,
+
+.markdown-section--overview
+.project-section__content ul,
+
+.markdown-section--overview
+.project-section__content ol {
+  max-width:
+    56rem;
+
+  margin-inline:
+    auto;
+}
+
+.markdown-section--overview
+.project-section__content p {
+  margin-bottom:
+    1.5rem;
+
+  color:
+    #d8d8d8;
+
+  font-size:
+    clamp(
+      1.2rem,
+      1.5vw,
+      1.35rem
+    );
+
+  line-height:
+    1.8;
+}
+
+.markdown-section--overview
+.project-section__content li {
+  color:
+    #d8d8d8;
+
+  font-size:
+    clamp(
+      1.2rem,
+      1.5vw,
+      1.35rem
+    );
+
+  line-height:
+    1.75;
+}
+
+
+/* ---------------- TECHNICAL BREAKDOWN ---------------- */
+
+.markdown-section--technical
+.project-section__content {
+  max-width:
+    72rem;
+}
+
+.markdown-section--technical
+.project-section__content p,
+
+.markdown-section--technical
+.project-section__content ul,
+
+.markdown-section--technical
+.project-section__content ol {
+  max-width:
+    56rem;
+
+  margin-inline:
+    auto;
+}
+
+.markdown-section--technical
+.project-section__content p,
+.markdown-section--technical
+.project-section__content li {
+  margin-bottom:
+    1.5rem;
+
+  color:
+    #d8d8d8;
+
+  font-size:
+    clamp(
+      1.35rem,
+      1.7vw,
+      1.55rem
+    );
+
+  line-height:
+    1.8;
+}
+
+/* ---------------- TECHNICAL DIAGRAMS ---------------- */
+
+.markdown-section--technical
 .project-section__content pre {
-  overflow-x: auto;
+  display: inline-block;
+
+  vertical-align: top;
+
+  box-sizing: border-box;
+
+  width:
+    calc(
+      50% - 1rem
+    );
+
+  margin:
+    clamp(
+      2.5rem,
+      4vw,
+      4rem
+    )
+    0;
 
   padding:
     clamp(
-      1rem,
-      2vw,
-      1.5rem
+      1.5rem,
+      2.5vw,
+      2rem
     );
+
+  overflow-x: auto;
 
   background:
     #101216;
@@ -45,135 +310,119 @@
     var(--radius-sm);
 }
 
-.project-section__content code {
-  font-family:
-    "SFMono-Regular",
-    Consolas,
-    "Liberation Mono",
-    monospace;
-}
-
-
-/* ---------------- OVERVIEW ---------------- */
-
-.markdown-section--overview
-.markdown-section__title {
-  font-size:
-    clamp(
-      2rem,
-      3vw,
-      3rem
-    );
-
-  color:
-    var(--color-text);
-}
-
-.markdown-section--overview
-.project-section__content {
-  max-width:
-    68rem;
-}
-
-.markdown-section--overview
-.project-section__content p {
-  color:
-    var(--color-text);
-
-  font-size:
-    clamp(
-      1.15rem,
-      1.4vw,
-      1.35rem
-    );
-
-  line-height: 1.75;
-}
-
-.markdown-section--overview
-.project-section__content ul,
-.markdown-section--overview
-.project-section__content ol {
-  margin-top: 1.25rem;
-}
-
-.markdown-section--overview
-.project-section__content li {
-  color:
-    var(--color-text);
-
-  font-size:
-    clamp(
-      1.1rem,
-      1.25vw,
-      1.25rem
-    );
-
-  line-height: 1.7;
-}
-
-
-/* ---------------- TECHNICAL BREAKDOWN ---------------- */
-
 .markdown-section--technical
-.markdown-section__title {
-  font-size:
-    clamp(
-      2rem,
-      2.7vw,
-      2.8rem
-    );
-
-  color:
-    var(--color-text);
+.project-section__content pre + pre {
+  margin-left: 2rem;
 }
 
 .markdown-section--technical
-.project-section__content {
-  max-width:
-    72rem;
-}
-
-.markdown-section--technical
-.project-section__content p,
-.markdown-section--technical
-.project-section__content li {
-  color:
-    var(--color-text-secondary);
-
+.project-section__content pre code {
   font-size:
     clamp(
-      1rem,
-      1.05vw,
-      1.15rem
+      0.85rem,
+      0.95vw,
+      1rem
     );
 
-  line-height: 1.75;
+  line-height:
+    1.7;
 }
+
+
+/* ---------------- TECHNICAL HEADINGS ---------------- */
+
+/* Основные пункты */
 
 .markdown-section--technical
 .project-section__content h3 {
   margin-top:
     clamp(
-      2.75rem,
-      5vw,
-      4rem
+      4.5rem,
+      7vw,
+      6.5rem
     );
 
   margin-bottom:
-    1rem;
+    clamp(
+      1.5rem,
+      2vw,
+      2rem
+    );
+
+  text-align:
+    center;
 
   color:
     var(--color-text);
 
   font-size:
     clamp(
-      1.4rem,
-      1.8vw,
-      1.9rem
+      2rem,
+      3vw,
+      2.8rem
     );
 
-  line-height: 1.25;
+  font-weight:
+    700;
+
+  line-height:
+    1.15;
+}
+
+
+/* Подпункты */
+
+.markdown-section--technical
+.project-section__content h4 {
+  margin-top:
+    clamp(
+      2.75rem,
+      4vw,
+      3.5rem
+    );
+
+  margin-bottom:
+    1rem;
+
+  text-align:
+    center;
+
+  color:
+    var(--color-text);
+
+  font-size:
+    clamp(
+      1.45rem,
+      1.8vw,
+      1.8rem
+    );
+
+  font-weight:
+    650;
+
+  line-height:
+    1.25;
+}
+
+
+/* Первый заголовок без лишнего большого отступа сверху */
+
+.markdown-section--technical
+.project-section__content > h3:first-child {
+  margin-top: 0;
+}
+
+
+/* Списки внутри technical breakdown */
+
+.markdown-section--technical
+.project-section__content ul,
+
+.markdown-section--technical
+.project-section__content ol {
+  margin-block:
+    1rem
+    1.5rem;
 }
 
 
@@ -187,6 +436,7 @@
 
 .markdown-section--default
 .project-section__content p,
+
 .markdown-section--default
 .project-section__content li {
   color:
@@ -225,9 +475,43 @@
 
   .markdown-section--technical
   .project-section__content p,
+
   .markdown-section--technical
   .project-section__content li {
     font-size:
       1rem;
+  }
+
+  .markdown-section--technical
+  .project-section__content h3 {
+    margin-top:
+      3rem;
+
+    font-size:
+      1.55rem;
+  }
+
+  .markdown-section--technical
+  .project-section__content h4 {
+    margin-top:
+      2rem;
+
+    font-size:
+      1.2rem;
+  }
+
+  .markdown-image--left,
+  .markdown-image--right {
+    float: none;
+
+    width: 100%;
+
+    margin:
+      clamp(
+        2rem,
+        4vw,
+        3rem
+      )
+      0;
   }
 }
