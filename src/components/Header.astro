@@ -33,19 +33,36 @@ const aboutUrl =
 
 /* ---------------- LANGUAGE LINKS ---------------- */
 
-const englishUrl =
-  getLocalizedPath(
-    Astro.url.pathname,
-    lang,
-    'en'
+const pathname =
+  Astro.url.pathname;
+
+const rootUrl =
+  withBase('/');
+
+const isRootPage =
+  pathname === rootUrl ||
+  pathname === rootUrl.replace(
+    /\/$/,
+    ''
   );
 
+const englishUrl =
+  isRootPage
+    ? withBase('/')
+    : getLocalizedPath(
+        pathname,
+        lang,
+        'en'
+      );
+
 const russianUrl =
-  getLocalizedPath(
-    Astro.url.pathname,
-    lang,
-    'ru'
-  );
+  isRootPage
+    ? withBase('/ru/')
+    : getLocalizedPath(
+        pathname,
+        lang,
+        'ru'
+      );
 ---
 
 <header class="site-header">
