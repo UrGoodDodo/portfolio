@@ -1,5 +1,13 @@
 /* ---------------- PROJECTS PAGE ---------------- */
 .projects-page {
+  
+  padding-top:
+    clamp(
+      3rem,
+      6vw,
+      5rem
+    );
+
   padding-bottom:
     clamp(
       3rem,

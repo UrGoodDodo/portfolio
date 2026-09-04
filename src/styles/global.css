@@ -105,13 +105,6 @@ main {
 
   margin-inline: auto;
 
-  padding-top:
-    clamp(
-      3rem,
-      6vw,
-      5rem
-    );
-
   padding-bottom: 0;
 }
 

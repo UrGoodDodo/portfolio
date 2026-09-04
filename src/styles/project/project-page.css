@@ -3,6 +3,13 @@
 .project-page__header {
   width: 100%;
 
+  padding-top:
+      clamp(
+        3rem,
+        6vw,
+        5rem
+      );
+
   margin-bottom:
     clamp(
       3rem,

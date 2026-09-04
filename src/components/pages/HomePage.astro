@@ -14,6 +14,10 @@ import {
   getLatestProjectsByLanguage,
 } from '../../utils/projectContent';
 
+import SocialLinks from '../SocialLinks.astro';
+
+import '../../styles/social-links.css';
+
 interface Props {
   lang: Language;
 }
@@ -60,6 +64,8 @@ const aboutImageUrl = withBase('/images/home/about.jpg');
         {data.subtitle}
       </p>
     )}
+
+      <SocialLinks />
 
     <div class="home-hero__actions">
       <a

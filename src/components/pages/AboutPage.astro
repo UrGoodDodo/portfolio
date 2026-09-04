@@ -7,6 +7,10 @@ import type { Language } from '../../i18n/config';
 import { getUi } from '../../i18n/utils';
 import { getPageContent } from '../../utils/pageContent';
 
+import SocialLinks from '../SocialLinks.astro';
+
+import '../../styles/social-links.css';
+
 interface Props {
   lang: Language;
 }
@@ -49,6 +53,9 @@ const data = page.data;
     <p class="about-hero__intro">
       {data.intro}
     </p>
+
+    <SocialLinks />
+
   </div>
 </section>
 

@@ -168,6 +168,7 @@
 
 .markdown-section--overview
 .project-section__content {
+  text-align: justify;
   max-width:
     68rem;
 }
@@ -227,6 +228,7 @@
 
 .markdown-section--technical
 .project-section__content {
+  text-align: justify;
   max-width:
     72rem;
 }
@@ -457,61 +459,81 @@
 
 @media (max-width: 48rem) {
   .markdown-section__title {
-    margin-bottom:
-      1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .markdown-section--overview
   .project-section__content p {
-    font-size:
-      1.05rem;
+    font-size: 1.05rem;
   }
 
   .markdown-section--overview
   .project-section__content li {
-    font-size:
-      1.05rem;
+    font-size: 1.05rem;
   }
 
   .markdown-section--technical
   .project-section__content p,
-
   .markdown-section--technical
   .project-section__content li {
-    font-size:
-      1rem;
+    font-size: 1rem;
   }
 
   .markdown-section--technical
   .project-section__content h3 {
-    margin-top:
-      3rem;
-
-    font-size:
-      1.55rem;
+    margin-top: 3rem;
+    font-size: 1.55rem;
   }
 
   .markdown-section--technical
   .project-section__content h4 {
-    margin-top:
-      2rem;
-
-    font-size:
-      1.2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
   }
 
-  .markdown-image--left,
-  .markdown-image--right {
+
+  /* ---------------- MOBILE MARKDOWN IMAGES ---------------- */
+
+  .project-section__content .markdown-image {
     float: none;
 
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 22rem;
 
     margin:
-      clamp(
-        2rem,
-        4vw,
-        3rem
-      )
-      0;
+      2rem
+      auto;
+
+    padding-bottom: 0;
+
+    object-fit: contain;
+  }
+
+  .project-section__content .markdown-image--contained {
+    max-width: 70%;
+    max-height: 16rem;
+  }
+
+
+
+  /* Пара картинок тоже становится обычным вертикальным блоком */
+
+  .markdown-image-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+
+    width: 100%;
+    margin: 2rem auto;
+  }
+
+  .markdown-image-pair .markdown-image--half {
+    width: 100%;
+    max-width: 100%;
+    max-height: 16rem;
+
+    margin: 0;
+
+    object-fit: contain;
   }
 }
