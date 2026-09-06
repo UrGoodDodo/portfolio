@@ -1,40 +1,33 @@
 ---
-title: "Unreal Engine Cinematic"
+title: "Синематик в Unreal Engine"
 
-description: "A cinematic scene created in Unreal Engine with a focus on composition, lighting, camera work and visual storytelling."
+description: "Учебный проект по созданию синематика, реализованный в рамках курса по режиссуре синематика в Unreal Engine"
 
-year: 2026
+year: 2025
 
 roles:
-  - Cinematic
-  - Level Design
-  - Technical Art
+  - Режиссура синематика
+  - Дизайн окружения
+  - Освещение/Рендеринг
 
 technologies:
   - Unreal Engine
   - Sequencer
 
-cover: "/images/unreal-cinematic/cover.jpg"
+cover: "/images/projects/unreal-cinematic/cover.webp"
 
 featured: false
 
 sections:
-  - hero-video
   - overview
   - gameplay-video
-  - gallery
-  - project-links
+  - presentation
 
-heroVideo: "/videos/unreal-cinematic/cinematic.webm"
+gameplayVideo: "https://www.youtube.com/watch?v=Cj2LMSD4pnY"
 
-gameplayVideo: "/videos/unreal-cinematic/full-cinematic.mp4"
+presentation:
+  folder: "/presentations/unreal-cinematic"
+  slides: 9
+  format: "webp"
 
-gallery:
-  - "/images/unreal-cinematic/shot-01.jpg"
-  - "/images/unreal-cinematic/shot-02.jpg"
-  - "/images/unreal-cinematic/shot-03.jpg"
-
-links:
-  - label: "Video"
-    url: "https://drive.google.com/file/d/1y99Hw5NO73KE5G-jy1OXnNbsfOEztHJ6/view?usp=drive_link"
 ---

@@ -1,49 +1,33 @@
 ---
 title: "Unreal Engine Cinematic"
 
-description: "A cinematic scene created in Unreal Engine with a focus on composition, lighting, camera work and visual storytelling."
+description: "An educational cinematic project created as part of a cinematic direction course in Unreal Engine."
 
-year: 2026
+year: 2025
 
 roles:
-  - Cinematic
-  - Level Design
-  - Technical Art
+  - Cinematic Direction
+  - Environment Art
+  - Lighting
 
 technologies:
   - Unreal Engine
   - Sequencer
 
-cover: "/images/unreal-cinematic/cover.jpg"
+cover: "/images/projects/unreal-cinematic/cover.webp"
 
 featured: false
 
 sections:
   - overview
   - gameplay-video
-  - gallery
-  - project-links
+  - presentation
 
 gameplayVideo: "https://www.youtube.com/watch?v=Cj2LMSD4pnY"
 
-gallery:
-  - "/images/gallery/unreal-cinematic/01.webp"
-  - "/images/gallery/unreal-cinematic/02.webp"
-  - "/images/gallery/unreal-cinematic/03.webp"
-  - "/images/gallery/unreal-cinematic/01.webp"
-  - "/images/gallery/unreal-cinematic/02.webp"
-  - "/images/gallery/unreal-cinematic/03.webp"
-  - "/images/gallery/unreal-cinematic/01.webp"
-  - "/images/gallery/unreal-cinematic/02.webp"
-  - "/images/gallery/unreal-cinematic/03.webp"
+presentation:
+  folder: "/presentations/unreal-cinematic"
+  slides: 9
+  format: "webp"
 
-links:
-  - label: "Video"
-    url: "https://drive.google.com/file/d/1y99Hw5NO73KE5G-jy1OXnNbsfOEztHJ6/view?usp=drive_link"
-    
-  - label: "Full Cinematic"
-    url: "..."
-
-  - label: "Playable Build"
-    url: "..."
 ---
