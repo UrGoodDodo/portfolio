@@ -1,7 +1,7 @@
 ---
 title: "Half Empty"
 
-description: "A game jam project where my main responsibilities were scene dressing, asset selection, and shader and material work."
+description: "A game created during the MMCS GameJam."
 
 year: 2026
 

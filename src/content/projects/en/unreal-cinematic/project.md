@@ -1,7 +1,7 @@
 ---
 title: "Unreal Engine Cinematic"
 
-description: "An educational cinematic project created as part of a cinematic direction course in Unreal Engine."
+description: "An educational cinematic project created as final project of a cinematic direction course in Unreal Engine."
 
 year: 2025
 
